@@ -8,7 +8,7 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className=" h-32 flex  justify-around  items-center">
+    <div className=" h-32 flex  justify-around  items-center shadow-xl">
       {/* // Left Protion */}
       <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14"></img>
       {/* Center Protion */}
@@ -24,10 +24,10 @@ const Navbar = () => {
      <div>
       <ul className=" flex gap-5 text-xl">
         <li className=" cursor-pointer">Sale</li>
-        <li className=" cursor-pointer hover:ext-gray-300">Home</li>
-        <li className=" cursor-pointer hover:text-gray-300">Man</li>
-        <li className=" cursor-pointer hover:text-gray-300">Kids</li>
-        <li className=" cursor-pointer hover:text-gray-300">Beauty</li>
+        <li className=" cursor-pointer hover:ext-gray-300"><Link href={'/'}>Home</Link></li>
+        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products'}>Man</Link></li>
+        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/kids'}>Kids</Link></li>
+        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/beauty'}>Beauty</Link></li>
         <li className=" cursor-pointer hover:text-gray-300">Home</li>
         <li className=" cursor-pointer hover:text-gray-300">Brand</li>
         <li className=" cursor-pointer hover:text-gray-300">W-Style</li>
