@@ -12,7 +12,7 @@ export default function Home( ) {
   return (
    <>
    <div className="h-screen bg-[url('https://www.westside.com/cdn/shop/files/WESTERN-1_95b35468-f0c3-4393-819b-461ea9c7015d.jpg?v=1706342919')] bg-center bg-cover">
-   <Navbar></Navbar>
+   
    </div>
    <div className="second-image">
     <img src="https://www.westside.com/cdn/shop/files/MAN_2_D.jpg?v=1706260775" alt="" srcset="" />
@@ -23,7 +23,7 @@ export default function Home( ) {
    <div className="fourth-image">
     <img src="https://www.westside.com/cdn/shop/files/WS_Web_Hero_Banner_04_2945ec97-3eb4-4ddd-a080-a58c64aac7d1.jpg?v=1697194912" alt="" srcset="" />
    </div>
-   <Footer></Footer>
+   
    </>
   );
 }

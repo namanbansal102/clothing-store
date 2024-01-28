@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="outerClass flex gap-4 justify-center items-center p-1 border-2 border-black rounded-3xl my-2">
       <FontAwesomeIcon icon={faMagnifyingGlass} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon>
-      <input className=" h-12  border-2 border-red-300 w-full border-none outline-none rounded-3xl font-medium text-xl bg-transparent" type="text" placeholder="Search For SweatShirts"/>
+      <input className=" h-12  border-2 border-red-300 w-full border-none outline-none rounded-xl font-medium text-xl bg-transparent placeholder-black" type="text" placeholder="Search For SweatShirts"/>
       
      </div>
      {/* Center Lowest Portion */}
