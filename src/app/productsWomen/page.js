@@ -1,4 +1,4 @@
-import Product from '@/app/Product'
+import Product from '@/app/Productcard'
 import React from 'react'
 
 const page = () => {

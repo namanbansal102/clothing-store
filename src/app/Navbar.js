@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import React from "react";
-
-
 const Navbar = () => {
   return (
-    <div className=" h-32 flex  justify-around  items-center shadow-xl">
+    <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent">
       {/* // Left Protion */}
       <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14"></img>
       {/* Center Protion */}
@@ -40,7 +38,7 @@ const Navbar = () => {
     <FontAwesomeIcon icon={faHeart} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon>
     <FontAwesomeIcon icon={faBagShopping} className="fa-solid fa-magnifying-glass" 
-></FontAwesomeIcon>
+><Link href={'/cart'}></Link></FontAwesomeIcon>
 <Link href='about'>Sign In</Link>
     </div>
     </div>
