@@ -21,7 +21,7 @@ const Navbar = () => {
      {/* Center Lowest Portion */}
      <div>
       <ul className=" flex gap-5 text-xl">
-        <li className=" cursor-pointer">Sale</li>
+        <li className=" cursor-pointer text-red-400 font-semibold">Sale</li>
         <li className=" cursor-pointer hover:ext-gray-300"><Link href={'/'}>Home</Link></li>
         <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products'}>Man</Link></li>
         <li className=" cursor-pointer hover:text-gray-300"><Link href={'/kids'}>Kids</Link></li>
@@ -37,9 +37,9 @@ const Navbar = () => {
     <div className="  w-fit h-fit flex gap-4  justify-center items-center font-medium text-2xl font-medium">
     <FontAwesomeIcon icon={faHeart} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon>
-    <FontAwesomeIcon icon={faBagShopping} className="fa-solid fa-magnifying-glass" 
-><Link href={'/cart'}></Link></FontAwesomeIcon>
-<Link href='about'>Sign In</Link>
+<Link href={'/cart'}><FontAwesomeIcon icon={faBagShopping} className="fa-solid fa-magnifying-glass" 
+></FontAwesomeIcon></Link>
+<Link href={'/Login'}>Sign In</Link>
     </div>
     </div>
   )
