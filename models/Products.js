@@ -11,4 +11,6 @@ const ProductsSchema=new mongoose.Schema({
     quantity:{type:String,required:true,default:1},
 
 },{timestamps:true})
+// Not For Recompiling The Module
+mongoose.models={}
 export default mongoose.model("Products",ProductsSchema)

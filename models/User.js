@@ -6,4 +6,6 @@ const UsersSchema=new mongoose.Schema({
     img:{type:String},
 
 },{timestamps:true})
+// Not For Recompiling The Module
+mongoose.models={}
 export default mongoose.model("User",UsersSchema)
