@@ -35,6 +35,7 @@ const PinCode = () => {
     </div>
     {avalibiltiy && <h1 className='font-bold'>Delivery Within 3-7 Days</h1>}
     {pin && !avalibiltiy && <h1 className=' font-bold'>Sorry Not Reached At This Point</h1>}
+    
 </>
   )
   

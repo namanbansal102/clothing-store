@@ -5,7 +5,6 @@ const page = () => {
   return (
     <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
         <div className="whole-cart-big w-fit px-4  rounded-2xl shadow-md">
-
         <div className="cart-head flex items-center flex-col ">
             <div className="cart-head-right text-3xl my-3">Shopping Bag (03)</div>
             <div className="card-head-left">
