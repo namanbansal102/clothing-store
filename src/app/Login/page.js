@@ -9,7 +9,7 @@ const page = () => {
             <div className="my-det">
                 <h1> Hello! hi! Want's to Login </h1>
                
-                <u>View Details</u>
+                <u className='text-lg'>View Details</u>
             </div>
         </div>
         <div className="lower-portion my-5">
