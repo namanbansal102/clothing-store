@@ -1,7 +1,57 @@
-import React from 'react'
+'use client'
+import React, { useEffect, useState } from 'react'
 import MyCart from '../MyCart'
 
-const page = () => {
+const page =() => {
+  
+  const total=0;
+  const [discount, setdiscount] = useState(0)
+    const [json, setjson] = useState([]);
+  const [localStorageItems, setlocalStorageItems] = useState([]);
+  useEffect(() => {
+    const localStorageItemsArray = [];
+    for (const localStorageItem of Object.keys(localStorage)) {
+      const val = localStorageItem.split(".");
+      if (val[1] === 'westside') {
+        localStorageItemsArray.push({ id: localStorage.getItem(localStorageItem) });
+      }
+    }
+    console.log("localStorageItemsArray:::::::",localStorageItemsArray);
+
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:3000/api/getProd", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({arr:localStorageItemsArray}), // Send as JSON
+        });
+        const mydata = await response.json();
+
+        // Update state with fetched data and calculated values
+        setjson(mydata['arr']);
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle errors gracefully, e.g., display an error message
+      }
+    }
+    for (let i= 0; i < json.length; i++) {
+      const getamount = (json[i])['price'];
+      console.log("Total Amount is:::::::::::::::::::: ",getamount);
+      total+=getamount
+    }
+    fetchData();
+    
+  },[]);
+  
+  console.log("Json is::::::::::::::::::::::::",json);
+  for (let i= 0; i < json.length; i++) {
+    const getamount = (json[i])['price'];
+    console.log("Total Amount is:::::::::::::::::::: ",getamount);
+    total+=getamount
+  }
   return (
     <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
         <div className="whole-cart-big w-fit px-4  rounded-2xl shadow-md">
@@ -20,21 +70,21 @@ const page = () => {
             
         </div>
         <div className="myitems flex flex-col gap-4">
-
-        <MyCart></MyCart>
-        <MyCart></MyCart>
-        <MyCart></MyCart>
-        <MyCart></MyCart>
+        {
+            (json).map((element)=>{
+              return <MyCart outlet={element}></MyCart>
+            })
+        } 
         </div>
         </div>
-        <div className="cart-right  text-xl my-32 mx-33">
+        <div className="cart-right  text-xl my-32 mx-24  h-fit">
             <div className="get-amount leading-10">
 
     <h1 className='font-semibold text-3xl'>Total Amount</h1>
     <h1>Total Item&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4</h1>
-    <h1>Total Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1345</h1>
+    <h1>Total Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{total}</h1>
     <h1>Discount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</h1> 
-    <h1>Net Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1343</h1>
+    <h1>Net Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{total}</h1>
             </div>
             <button className='bg-black text-white h-12 w-full' >Order Now</button>
         </div>

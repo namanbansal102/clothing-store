@@ -1,14 +1,33 @@
-
+'use client'
 import PinCode from '@/app/PinCode'
 import Product from '@/app/Productcard'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const page =async  (params) => {
+  const [show, setshow] = useState("ADD TO BAG")
+  useEffect(() => {
+    console.log("Use Effect is Running");
+  console.log(localStorage.getItem((".westside."+_id.substring(0,10))));
+    
+      if (localStorage.getItem((".westside."+_id.substring(0,10)))==null) {
+        console.log("Satisifed if Condtion");
+        setshow("ADD TO BAG")
+      }
+      else{
+        console.log("Satisifed else Condtion");
+        setshow("ADDED TO BAG")
+      }
+    
+  },[])
+  
+  
   let title=""
-  let img=""
+  let img=null
   let price=""
   let categories=""
   let quantity=0
+  let desc=""
+  let _id=""
   let query=(params['params'])['product-name']
   console.log("..................... my query is",query);
     let data=await fetch('http://localhost:3000/api/fetchProd', {
@@ -19,23 +38,33 @@ const page =async  (params) => {
       body: JSON.stringify({slug:query}),
     })
     let json =await data.json()
-      if (json.status) {
+      if (json.status==true && json['myproduct']!=null) {
         
         console.log("In Client Side .................................",json);
+        _id=(json['myproduct'])['_id']
         img=(json['myproduct'])['img']
         title=(json['myproduct'])['title']
         price=(json['myproduct'])['price']
         categories=(json['myproduct'])['categories']
         quantity=(json['myproduct'])['quantity']
+        desc=(json['myproduct'])['desc']
+        console.log(_id);
         console.log(img);
       }
       else{
         console.log("Json Not Founded");
       }
+      const handleClick=()=>{
+        console.log("Handle Click Is Running");
+          localStorage.setItem((".westside."+_id.substring(0,10)),_id);
+        
+        
+      }
     
   return (
     <>
-    <div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around">
+    {img==null && <div className='h-full w-full flex justify-center items-center'><img className='my-8' src="https://freefrontend.com/assets/img/html-funny-404-pages/CodePen-404-Page.gif" alt="" /></div>}
+    {img!=null && <div><div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around">
       <div className="left-portion  w-fit flex gap-9 ">
       <img className='h-[65vh] shadow-lg rounded-xl rotate-3  backdrop-blur-4xl' src={img} alt="" />
       <img className='h-[65vh] shadow-lg rounded-xl -rotate-3 grayscale' src={img} alt="" />
@@ -56,13 +85,13 @@ const page =async  (params) => {
             <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>L</button>
             <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>XL</button>
           </div>
-          <button className='bg-black h-20 w-full text-white'>ADD TO BAG</button>
-          <div className="mydetails">
             <PinCode></PinCode>
+          <button onClick={handleClick} className='bg-black h-20 w-full text-white' >{show}</button>
+          <div className="mydetails">
 
           <details >
             <summary>Product Details and Overview</summary>
-            <p >Kick your style quotient up a notch with the Nuon t-shirt. Black canvas boasting a round neckline, short sleeves, and a contrast print infused with elegant embroidery details, this t-shirt effortlessly blends comfort and trendiness. Pair it with high-waisted jeans and sneakers for an effortlessly chic look.</p>
+            <p >{desc}</p>
           </details>
           <details>
             <summary>Delivery, Return & Exchange Policy</summary>
@@ -78,7 +107,7 @@ const page =async  (params) => {
     <div className="similar-products flex">
       
     </div>
-  </div>
+  </div></div>}
     </>
   )
 }

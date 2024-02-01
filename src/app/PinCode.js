@@ -1,5 +1,7 @@
 'use client'
 import React, { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PinCode = () => {
   const [pin, setPin] = useState(null);
@@ -16,9 +18,11 @@ const PinCode = () => {
     }).then((a)=>a.json()).then((json)=>{
       if (json.status=='available') {
         setavalibiltiy(true);
+        toast("Delivery Available!");
       }
       else{
         setavalibiltiy(false);
+        toast("Sorry Can't be Delivered!");
       }
       console.log(json);
     })
@@ -36,6 +40,7 @@ const PinCode = () => {
     {avalibiltiy && <h1 className='font-bold'>Delivery Within 3-7 Days</h1>}
     {pin && !avalibiltiy && <h1 className=' font-bold'>Sorry Not Reached At This Point</h1>}
     
+<ToastContainer />
 </>
   )
   
