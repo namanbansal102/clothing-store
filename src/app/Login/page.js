@@ -1,11 +1,13 @@
 'use client'
+
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+import { useRouter } from 'next/navigation'
 const page = () => {
+  const router= useRouter()
     const [email, setemail] = useState(null);
     const [password, setpassword] = useState(null);
     const handleChange=(e)=>{
@@ -31,8 +33,9 @@ const page = () => {
     }).then((a)=>a.json()).then((json)=>{
       if (json.success==true && json.token!=null) {
         toast("Login Successfully!");
-        localStorage.setItem('token',JSON.stringify(json))
+        document.cookie=`token=${JSON.stringify(json['token'])}`;
         console.log("Login Successfully");
+        router.push(`/`,{scroll:false})
     }
     else{
         toast("Invalid password");

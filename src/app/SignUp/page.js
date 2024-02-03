@@ -35,7 +35,7 @@ const page = () => {
     }).then((a)=>a.json()).then((json)=>{
       if (json.success==true && json.token!=null) {
         toast("Sign Up Successfully!");
-        localStorage.setItem('token',JSON.stringify(json))
+        document.cookie=`token=${JSON.stringify(json['token'])}`;
         console.log("Sign Up Successfully");
     }
     else{

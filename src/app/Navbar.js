@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import React from "react";
+import { headers } from "next/headers";
 const Navbar = () => {
+  let newheader=headers()
+  console.log("Our New headers are:",newheader);
   return (
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent">
       {/* // Left Protion */}

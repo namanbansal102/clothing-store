@@ -1,3 +1,4 @@
+import {SignJWT, jwtVerify} from 'jose';
 import connectDb from "../../../../middleware/mongoose"
 import User from "../../../../models/User"
 var CryptoJS = require("crypto-js");
@@ -22,9 +23,11 @@ export async function POST(req,res){
             var originalpass = bytes.toString(CryptoJS.enc.Utf8);
             console.log("The originalText text is:",originalpass);
             if (originalpass===password) {
-                const token=jwt.sign({success:true,email:email,name:userData.name},process.env.JWT_SECRET)
-                return Response.json({success:true,token},{status:200})
+                const token=await sign({email:userData.email,name:userData.name},process.env.JWT_SECRET)
+              
+              return Response.json({success:true,token},{status:200})
             }
+            
             else{
                 return Response.json({status:false},{status:200})
 
@@ -36,4 +39,15 @@ export async function POST(req,res){
         return Response.json({status:false},{status:400})
     }
 
+}
+async function sign(payload, secret) {
+    const iat = Math.floor(Date.now() / 1000);
+    const exp = iat + 60 * 100; // one hour
+
+    return new SignJWT({ ...payload })
+        .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+        .setExpirationTime(exp)
+        .setIssuedAt(iat)
+        .setNotBefore(iat)
+        .sign(new TextEncoder().encode(secret));
 }
