@@ -22,7 +22,7 @@ const page = () => {
         console.log("Handle Click is Running");
         console.log(email);
         console.log(password);
-    fetch('http://localhost:3000/api/login', {
+    fetch(`${process.env.NEXT_PUBLIC_HOST}api/login`, {
       method: 'POST',
       headers: {  
         'Content-Type': 'application/json',

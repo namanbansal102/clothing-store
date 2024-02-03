@@ -2,21 +2,21 @@
 import PinCode from '@/app/PinCode'
 import Product from '@/app/Productcard'
 import React, { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const page =async  (params) => {
   const [show, setshow] = useState("ADD TO BAG")
   useEffect(() => {
     console.log("Use Effect is Running");
-  console.log(localStorage.getItem((".westside."+_id.substring(0,10))));
+  console.log("Getted item from localStroage is...........",localStorage.getItem((".westside."+_id.substring(0,10))));
     
-      if (localStorage.getItem((".westside."+_id.substring(0,10)))==null) {
+      if (localStorage.getItem((".westside."+_id.substring(0,10)))!=null) {
         console.log("Satisifed if Condtion");
-        setshow("ADD TO BAG")
-      }
-      else{
-        console.log("Satisifed else Condtion");
         setshow("ADDED TO BAG")
       }
+      
     
   },[])
   
@@ -30,7 +30,7 @@ const page =async  (params) => {
   let _id=""
   let query=(params['params'])['product-name']
   console.log("..................... my query is",query);
-    let data=await fetch('http://localhost:3000/api/fetchProd', {
+    let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/fetchProd`, {
       method: 'POST',
       headers: {  
         'Content-Type': 'application/json',
@@ -55,8 +55,8 @@ const page =async  (params) => {
         console.log("Json Not Founded");
       }
       const handleClick=()=>{
-        console.log("Handle Click Is Running");
           localStorage.setItem((".westside."+_id.substring(0,10)),_id);
+          toast("Item Added To Cart")
         
         
       }
@@ -107,7 +107,8 @@ const page =async  (params) => {
     <div className="similar-products flex">
       
     </div>
-  </div></div>}
+  </div><ToastContainer /></div>
+  }
     </>
   )
 }

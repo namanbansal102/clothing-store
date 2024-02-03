@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const page = async () => {
   
-  let data=await fetch("http://localhost:3000/api/getProducts")
+  let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProducts`)
   let json=await data.json()
     return (
       <div className=' grid grid-cols-4 gap-4 '>

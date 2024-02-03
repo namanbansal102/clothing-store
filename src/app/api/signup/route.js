@@ -12,7 +12,7 @@ export async function POST(request,response){
         if (make.img!=undefined) {
             img=make.img
         }
-        var cipherpass = CryptoJS.AES.encrypt(make.password, 'naman#$%@@#!221323%6namanbansal@#EF').toString();
+        var cipherpass = CryptoJS.AES.encrypt(make.password, process.env.CRYPTO_SECRET).toString();
         await connectDb();
         let u=new User({
             name:make.name,
@@ -21,7 +21,7 @@ export async function POST(request,response){
             img:img
         })
         await u.save();
-        const token=jwt.sign({success:true,email:make.email,name:make.name},'namansecretjwtsecret')
+        const token=jwt.sign({success:true,email:make.email,name:make.name},process.env.JWT_SECRET)
         return Response.json({success:true,token},{status:200})
     }catch(error){
         console.log(error);

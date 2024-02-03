@@ -1,12 +1,12 @@
 export async function POST(request,response){
     let pin=await request.json()
     pin=pin.pin
-    const myjson={
-        125102:"Ellenabad",140401:"Rajpura",
-        125100:"Sirsa"
-    }
-    if (myjson[pin]!=undefined) {
-        return Response.json({"status":"available"})
+    let data=await fetch(`https://api.postalpincode.in/pincode/${pin}`)
+
+    let json=await data.json()
+    console.log(json);
+    if ((json[0])['Status']=="Success") {
+        return Response.json({"status":"available","state":((json[0])['PostOffice'])[0]["State"],"Block":((json[0])['PostOffice'])[0]["Block"]})   
     }
     else{
         

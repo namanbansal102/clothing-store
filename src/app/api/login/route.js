@@ -18,11 +18,11 @@ export async function POST(req,res){
             const userData = await query.exec();
             console.log("User Data Password is:",userData.password);
             console.log("User Id is:",userData._id);
-            var bytes  = CryptoJS.AES.decrypt(userData.password, 'naman#$%@@#!221323%6namanbansal@#EF');
+            var bytes  = CryptoJS.AES.decrypt(userData.password,process.env.CRYPTO_SECRET);
             var originalpass = bytes.toString(CryptoJS.enc.Utf8);
             console.log("The originalText text is:",originalpass);
             if (originalpass===password) {
-                const token=jwt.sign({success:true,email:email,name:userData.name},'namansecretjwtsecret')
+                const token=jwt.sign({success:true,email:email,name:userData.name},process.env.JWT_SECRET)
                 return Response.json({success:true,token},{status:200})
             }
             else{

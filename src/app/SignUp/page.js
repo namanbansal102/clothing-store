@@ -26,7 +26,7 @@ const page = () => {
         console.log("Handle Click is Running");
         console.log(email);
         console.log(password);
-    fetch('http://localhost:3000/api/signup', {
+    fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
       method: 'POST',
       headers: {  
         'Content-Type': 'application/json',
