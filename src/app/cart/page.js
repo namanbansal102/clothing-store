@@ -17,6 +17,7 @@ const page =() => {
   }
   const [json, setjson] = useState([]);
   useEffect(() => {
+    setjson([])
   console.log("use Effect is Running");
   fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProd`, {
     method: 'POST',
@@ -31,6 +32,7 @@ const page =() => {
       const isItemDuplicate = json.some((item) => item._id === k.myproduct._id);
 
       if (!isItemDuplicate) {
+        console.log("is item Duplicated Running ");
         setjson((prevJson) => [...prevJson, k.myproduct]);
       }
     })
