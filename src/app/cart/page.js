@@ -7,38 +7,42 @@ const page =() => {
   const joyt=[]
   const [total, settotal] = useState(0)
   const [discount, setdiscount] = useState(0)
+  function listCookies() {
+    var theCookies = document.cookie.split(';');
+    var aString = '';
+    for (var i = 1 ; i <= theCookies.length; i++) {
+      aString += i + ' ' + theCookies[i-1] + "\n";
+    }
+    return aString;
+  }
   const [json, setjson] = useState([]);
   useEffect(() => {
-    async function fetchData(){
+  console.log("use Effect is Running");
+  fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProd`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: "65b7f1ab995e10c4f1419024" }), // Send as JSON
+  })
+    .then((response) => response.json())
+    .then((k) => {
+      console.log("k is::::::::::::::::::::::::::", k);
+      const isItemDuplicate = json.some((item) => item._id === k.myproduct._id);
 
-      const yout= Object.keys(localStorage)
-      for (const localStorageItem of yout) {
-        const val = localStorageItem.split(".");
-        if (val[1] === 'westside') {    
-          const response =await  fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProd`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({id: localStorage.getItem(localStorageItem)}), // Send as JSON
-        });
-        const mydata = await response.json();
-        console.log("My Data is:",mydata);
-        
-      setjson(json.push(mydata['myproduct']));  
+      if (!isItemDuplicate) {
+        setjson((prevJson) => [...prevJson, k.myproduct]);
       }
-    }
-  }
-  fetchData()
-  },[]);
- 
+    })
+}, []); // Empty dependency array means this effect runs only once after the initial render
+
   if (json.length!=0) {
     console.log("Json has Some Data");
     console.log(json);
     for (let i = 0; i  < json.length; i++) {
       let element = (json[i])['price'] ;
       console.log(element);
-      settotal(total+element)
+      
     }
   }else{
     console.log("Json lenght equal to 0");

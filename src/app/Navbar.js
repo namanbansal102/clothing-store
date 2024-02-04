@@ -1,13 +1,45 @@
+'use client'
+import { useCookies } from 'next-client-cookies';
+
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import Image from "next/image";
 import Script from "next/script";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import React from "react";
-import { headers } from "next/headers";
-const Navbar = () => {
-  let newheader=headers()
-  console.log("Our New headers are:",newheader);
+import React, { useState,useEffect } from "react";
+import PopNav from './PopNav';
+
+
+const Navbar =() => {
+  const cookies=useCookies()
+  const handlelogout=()=>{
+    cookies.delete('token')
+    toast("Logout Successfully")
+    
+  }
+  const [status, setstatus] = useState("Login")
+
+  useEffect(() => {
+
+    fetch(`${process.env.NEXT_PUBLIC_HOST}api/cookieProd`, {
+      method: 'POST',
+      headers: {  
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({token:cookies.get('token')}),
+    }).then((a)=>a.json()).then((json)=>{
+      if (json.success==true && json.data!=null) {
+        console.log("My json is::::::::::::::::::::::::::",json);
+       setstatus(json['data']['name']) 
+    }
+
+    })
+  }, [])
+  
   return (
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent">
       {/* // Left Protion */}
@@ -37,12 +69,24 @@ const Navbar = () => {
       </div>
       </div>
     {/* Right Portion */}
-    <div className="  w-fit h-fit flex gap-4  justify-center items-center font-medium text-2xl font-medium">
-    <FontAwesomeIcon icon={faHeart} className="fa-solid fa-magnifying-glass" 
+    <div className=" w-fit h-fit flex gap-7  justify-center items-center font-medium text-2xl font-medium">
+    <FontAwesomeIcon  icon={faHeart} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon>
-<Link href={'/cart'}><FontAwesomeIcon icon={faBagShopping} className="fa-solid fa-magnifying-glass" 
+<Link href={'/cart'}><FontAwesomeIcon  icon={faBagShopping} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon></Link>
-<Link href={'/Login'}>Sign In</Link>
+<div className='flex flex-col'>
+<ToastContainer />
+<Link href={'/Login'}>
+<button className="button bg-black text-white text-md px-3 rounded-md">{status}</button>
+</Link>
+{/* <Popup  trigger={} modal>
+    <span className=' flex bg-white flex-col gap-6 rounded-sm  '>
+      <h1 className='text-black text-2xl'>Your Name:{status}</h1>
+      <h1 className='text-black text-2xl'>Your email:{status}@gmail.com</h1>
+      <button onClick={() => cookies.delete('token')} className="button bg-black w-fit  text-white text-md px-3 h-10 m-8 rounded-md">Logout</button></span>
+  </Popup> */}
+
+</div>
     </div>
     </div>
   )

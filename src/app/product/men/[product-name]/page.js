@@ -6,58 +6,76 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-const page =async  (params) => {
+const page =(params) => {
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
   const [show, setshow] = useState("ADD TO BAG")
+  const [json, setjson] = useState([])
+  const [title, settitle] = useState("")
+  const [disabled, setdisabled] = useState(false)
+    const [img, setimg] = useState(null)
+    const [price, setprice] = useState("")
+    const [categories, setcategories] = useState("")
+    const [quantity, setquantity] = useState("")
+    const [desc, setdesc] = useState("")
+    const [id, setid] = useState("")
+  
   useEffect(() => {
-    console.log("Use Effect is Running");
-  console.log("Getted item from localStroage is...........",localStorage.getItem((".westside."+_id.substring(0,10))));
     
-      if (localStorage.getItem((".westside."+_id.substring(0,10)))!=null) {
-        console.log("Satisifed if Condtion");
-        setshow("ADDED TO BAG")
-      }
-      
-    
-  },[])
-  
-  
-  let title=""
-  let img=null
-  let price=""
-  let categories=""
-  let quantity=0
-  let desc=""
-  let _id=""
-  let query=(params['params'])['product-name']
-  console.log("..................... my query is",query);
-    let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/fetchProd`, {
+    fetch(`${process.env.NEXT_PUBLIC_HOST}api/fetchProd`, {
       method: 'POST',
       headers: {  
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({slug:query}),
+      body: JSON.stringify({ slug: query }),
     })
-    let json =await data.json()
-      if (json.status==true && json['myproduct']!=null) {
-        
-        console.log("In Client Side .................................",json);
-        _id=(json['myproduct'])['_id']
-        img=(json['myproduct'])['img']
-        title=(json['myproduct'])['title']
-        price=(json['myproduct'])['price']
-        categories=(json['myproduct'])['categories']
-        quantity=(json['myproduct'])['quantity']
-        desc=(json['myproduct'])['desc']
-        console.log(_id);
-        console.log(img);
-      }
-      else{
-        console.log("Json Not Founded");
-      }
-      const handleClick=()=>{
-          localStorage.setItem((".westside."+_id.substring(0,10)),_id);
-          toast("Item Added To Cart")
-        
+      .then((response) => response.json())
+      .then((newData) => {
+        console.log("newData is::::::::::::::::::::::::::::::::::::::::", newData);
+    
+        if (newData.status === true && newData.myproduct != null) {
+          console.log("In Client Side .................................", newData);
+    
+          const productData = newData.myproduct; // Store myproduct in a variable for clarity
+    
+          setid(productData._id);
+          setimg(productData.img);
+          settitle(productData.title);
+          setprice(productData.price);
+          setcategories(productData.categories);
+          setquantity(productData.quantity);
+          setdesc(productData.desc);
+          if (getCookie(".westside."+(productData._id).substring(0,10)+"_1")) {
+            console.log("Getting Cookie Already");
+            setshow("ALREADY IN BAG")
+            setdisabled(true)
+          }
+          
+        } else {
+          console.log("Json Not Found");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        // Handle errors here
+      });
+    },[show])
+  
+    
+    
+    let query=(params['params'])['product-name']
+    console.log("..................... my query is",query);
+    
+    const handleClick=()=>{
+      
+      document.cookie=`${".westside."+id.substring(0,10)+"_1"}=${JSON.stringify(id)}`;
+      setshow("ALREADY IN BAG")
+      setdisabled(true)
+      toast("Item Added To Cart")
+      
         
       }
     
@@ -86,7 +104,7 @@ const page =async  (params) => {
             <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>XL</button>
           </div>
             <PinCode></PinCode>
-          <button onClick={handleClick} className='bg-black h-20 w-full text-white' >{show}</button>
+          <button disabled={disabled} onClick={handleClick} className=' bg-black h-20 w-full text-white disabled:bg-gray-700' >{show}</button>
           <div className="mydetails">
 
           <details >
