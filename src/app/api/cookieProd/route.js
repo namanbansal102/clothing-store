@@ -4,8 +4,6 @@ import {SignJWT, jwtVerify} from 'jose';
 export async function POST(req,res){
     let token=await req.json();
     try {
-        
-   
     token=token['token']
     if (!token) {
         return Response.json({"success":false,data:null},{status:401})

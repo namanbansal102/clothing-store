@@ -4,11 +4,26 @@ export async function POST(req,res){
     try{
         await connectDb();
         let data=await req.json()
-            const query = Products.findOne({ '_id': data['id'] });
-            query.select('title img category size color price quantity');
-            const myproduct = await query.exec();
-        // console.log("Under Server Side ........................",myproduct);
-        return Response.json({status:true,myproduct},{status:200})
+        data=data['id']
+        const k=[]
+        console.log("Data is Server Side is::",data);
+            for(let i=0;i<data.length;i++){
+
+                let value=(data[i])['value']
+                let name=(data[i])['name']
+
+                console.log("Value in For Loop is:",value);
+                value=value.split('"');
+                value=value[1];
+                
+                const query = Products.findOne({ '_id': value });
+                query.select('title img category size color price quantity');
+                let myproduct = await query.exec();
+                k.push(myproduct)
+            }
+        
+        console.log("Under Server Side ........................",k);
+        return Response.json({status:true,k},{status:200})
     }
     catch(error){
         console.log("Error Founded",error);

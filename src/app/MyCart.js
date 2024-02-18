@@ -1,10 +1,28 @@
+'use client'
 import { faDeleteLeft, faRemove } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 
 const MyCart = (props) => {
+  var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+  var getCookies = function(){
+    var pairs = document.cookie.split(";");
+    var cookies = {};
+    for (var i=0; i<pairs.length; i++){
+      var pair = pairs[i].split("=");
+      cookies[(pair[0]+'').trim()] = unescape(pair.slice(1).join('='));
+    }
+    return cookies;
+  }
   const [val, setval] = useState(1);
-  let outlet=props['outlet']
+
+  let {a,b,c}=props['outlet']
+  let outlet=a
+  console.log("a value is::",c);
+  
+  // console.log("myOutlet in my Cart Page is:",outlet);
   const handleDelete=()=>{
     console.log("Handle Delete is Running");
     let a=".westside."+(outlet['_id']).substring(0,10)
@@ -34,13 +52,37 @@ const MyCart = (props) => {
                     
                     <button className='rounded-full border-2 border-gray-100 px-2 ' onClick={()=>{
                       if (val!=0) {
+                        var myCookies = getCookies();
+                        console.log("Running Plus and Setting my Cookies are:",myCookies);
+                        Object.keys(myCookies).forEach(key => {
+                          if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
+                            console.log("Equal Equal Hoorahy");
+                            delete_cookie(key);
+                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10) +"_"+ (val-1)}=${JSON.stringify(outlet['_id'])}`;
+                          }
+                          console.log(`${key}: ${myCookies[key]}`);
+                      });
                         setval(val-1)
+
                       }
                       }}>-</button>
                     <h1>{val}</h1>
                     <button className='rounded-full border-2 border-gray-100 px-2 ' onClick={()=>{
                       if (val!=outlet['quantity']) {
-                      setval(val+1)}}}>+</button>
+                        var myCookies = getCookies();
+                        console.log("Running Plus and Setting my Cookies are:",myCookies);
+                        Object.keys(myCookies).forEach(key => {
+                          if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
+                            console.log("Equal Equal Hoorahy");
+                            delete_cookie(key);
+                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10) +"_"+ (val+1)}=${JSON.stringify(outlet['_id'])}`;
+                          }
+                          console.log(`${key}: ${myCookies[key]}`);
+                      });
+                      setval(val+1)
+                      // myCookies[`${".westside." + outlet['_id'].substring(0, 10) + "_1"}`]
+                    }
+                      }}>+</button>
                 </div>
                 <div className="subtotal">RS.{outlet['price']}</div>
                 <div  className="Delete cursor-pointer" onClick={handleDelete}><FontAwesomeIcon icon={faDeleteLeft}></FontAwesomeIcon></div>

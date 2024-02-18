@@ -1,5 +1,5 @@
 'use client'
-import { useCookies } from 'next-client-cookies';
+
 
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
@@ -12,33 +12,17 @@ import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faT
 import Link from "next/link";
 import React, { useState,useEffect } from "react";
 import PopNav from './PopNav';
-
-
-const Navbar =() => {
-  const cookies=useCookies()
-  const handlelogout=()=>{
-    cookies.delete('token')
-    toast("Logout Successfully")
-    
+const Navbar =(outlet) => {
+  console.log("In Navbar props outlet is:"+JSON.stringify(outlet));
+  let prop=(outlet['outlet'])
+  let getState="Login"
+  if (prop['success']) {
+    getState=(prop['data'])['name']
   }
+  console.log("Props are"+prop);
   const [status, setstatus] = useState("Login")
 
-  useEffect(() => {
 
-    fetch(`${process.env.NEXT_PUBLIC_HOST}api/cookieProd`, {
-      method: 'POST',
-      headers: {  
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({token:cookies.get('token')}),
-    }).then((a)=>a.json()).then((json)=>{
-      if (json.success==true && json.data!=null) {
-        console.log("My json is::::::::::::::::::::::::::",json);
-       setstatus(json['data']['name']) 
-    }
-
-    })
-  }, [])
   
   return (
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent">
@@ -77,7 +61,7 @@ const Navbar =() => {
 <div className='flex flex-col'>
 <ToastContainer />
 <Link href={'/Login'}>
-<button className="button bg-black text-white text-md px-3 rounded-md">{status}</button>
+<button className="button bg-black text-white text-md px-3 rounded-md">{getState}</button>
 </Link>
 {/* <Popup  trigger={} modal>
     <span className=' flex bg-white flex-col gap-6 rounded-sm  '>

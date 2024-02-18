@@ -5,6 +5,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Head from "next/head";
+import NavDataComponent from "./components/NavDataComponent";
 config.autoAddCss = false;
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +21,7 @@ export default function RootLayout({ children }) {
       <Head>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </Head>
-      <body className={inter.className}><Navbar></Navbar>{children}<Footer></Footer></body>
+      <body className={inter.className}><NavDataComponent></NavDataComponent>{children}<Footer></Footer></body>
     </html>
   );
 }
