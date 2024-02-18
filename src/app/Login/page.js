@@ -35,7 +35,8 @@ const page = () => {
         toast("Login Successfully!");
         document.cookie=`token=${JSON.stringify(json['token'])}`;
         console.log("Login Successfully");
-        router.push(`/`,{scroll:false})
+        router.push(`/`)
+        router.refresh()
     }
     else{
         toast("Invalid password");

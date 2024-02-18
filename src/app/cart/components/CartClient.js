@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import MyCart from '../../MyCart'
+import Link from 'next/link'
 
 const CartClient = (outlet) => {
     const [total, settotal] = useState(0)
@@ -9,12 +10,12 @@ const CartClient = (outlet) => {
     let json=(outlet['outlet'])['k']
     const [tempArray, settempArray] = useState([])
     const joyt=[]
-
+    console.log("json in Cart Fetched is:",json);
     const [discount, setdiscount] = useState(0)
   return (
     <>
-    {json.length==0 && <div className='h-full w-full flex justify-around my-10 items-center flex-col gap-9'><img src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="" /><h1 className='text-5xl font-bold' >YOUR CART IS EMPTY</h1></div>}
-    {json.length!=0 && <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
+    {json==undefined && <div className='h-full w-full flex justify-around my-10 items-center flex-col gap-9'><img src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="" /><h1 className='text-5xl font-bold' >YOUR CART IS EMPTY</h1></div>}
+    {json!=undefined && <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
       <div className="whole-cart-big w-fit px-4  rounded-2xl shadow-md">
       <div className="cart-head flex items-center flex-col ">
       <div className="cart-head-right text-3xl my-3">Shopping Bag (03)</div>
@@ -48,7 +49,9 @@ const CartClient = (outlet) => {
     <h1>Discount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</h1> 
     <h1>Net Amount&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{total}</h1>
     </div>
-    <button className='bg-black text-white h-12 w-full' >Order Now</button>
+    <Link href={'/orders'}>
+    <button className='bg-black text-white h-12 w-full'  >Order Now</button>
+    </Link>
     </div>
     </div>
   }

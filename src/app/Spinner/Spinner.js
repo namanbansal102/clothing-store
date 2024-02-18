@@ -1,13 +1,11 @@
 import React from 'react'
-import { ClimbingBoxLoader } from 'react-spinners'
+import { ClimbingBoxLoader,MoonLoader } from 'react-spinners'
 
 const Spinner = () => {
   return (
         <div>
-        <ClimbingBoxLoader
-    color="#000000"
-    loading
-    />
+       <MoonLoader color="#000000"
+  speedMultiplier={2} />
     </div>
   )
 }

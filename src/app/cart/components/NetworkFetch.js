@@ -5,6 +5,7 @@ import CartClient from './CartClient'
 const NetworkFetch =async (store) => {
     const storeo=store['store']
     var total=0;
+    console.log("Storeo is Storeo is Storeo is",storeo);
     const fetchData=async ()=>{
         let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProd`, {
            method: 'POST',

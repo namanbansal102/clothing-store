@@ -1,6 +1,7 @@
 import React from 'react'
-import Product from '../Productcard'
+
 import Link from 'next/link'
+import Product from '@/app/Productcard'
 
 const page = async () => {
   
@@ -9,9 +10,7 @@ const page = async () => {
     return (
       <div className=' grid grid-cols-4 gap-4 '>
         {json['products'].map((element)=>{
-          return <Link href={`product/men/${(element['slug'].split(" ")).join("-")}`}><Product outletName={element} /></Link>
-         
-          ;
+          return <Link href={`beauty/${(element['slug'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;
         })}
         </div>
   )
