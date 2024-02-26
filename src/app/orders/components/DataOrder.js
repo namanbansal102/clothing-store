@@ -1,7 +1,7 @@
 'use server'
 import React from 'react'
 import ClientOrder from './ClientOrder';
-import PaymentComponent from './paymentComponent'
+// import PaymentComponent from './paymentComponent'
 const DataOrder =async(store) => {
     const storeo=store['store']
     var total=0;
