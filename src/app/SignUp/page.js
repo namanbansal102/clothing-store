@@ -1,4 +1,5 @@
 'use client'
+import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
@@ -72,7 +73,20 @@ const page = () => {
                 <h1 className='text-center'><Link href={'/Login'}><u>Want's to Login</u>
                 </Link>
                 </h1>
-                
+                <div className='flex'>
+<div className=' w-16'></div>
+                <GoogleLogin 
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+    document.cookie=`token="${credentialResponse['credential']}"`
+    router.push('/')
+    router.refresh()
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
+  </div>
             </div>
         </div>
         <ToastContainer />

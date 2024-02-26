@@ -1,6 +1,7 @@
 'use client'
 
 import Popup from 'reactjs-popup';
+import  LoadingBar  from "react-top-loading-bar";
 import 'reactjs-popup/dist/index.css';
 import Image from "next/image";
 import Script from "next/script";
@@ -24,12 +25,15 @@ const Navbar =(outlet) => {
   var delete_cookie = function(name) {
     document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 };
+const [progress, setprogress] = useState(13)
 
 // Force refresh the page
 
 
   
   return (
+    <>
+    <LoadingBar color="#f11946" progress={progress} onLoaderFinished={() => setprogress(0)} />
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent">
       {/* // Left Protion */}
       <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14"></img>
@@ -47,10 +51,10 @@ const Navbar =(outlet) => {
       <ul className=" flex gap-5 text-xl">
         <li className=" cursor-pointer text-red-400 font-semibold">Sale</li>
         <li className=" cursor-pointer hover:ext-gray-300"><Link href={'/'}>Home</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/men'}>Man</Link></li>
+        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/men'}>Men</Link></li>
+        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/women'}>Women</Link></li>
         <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/kids'}>Kids</Link></li>
         <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/beauty'}>Beauty</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300">Home</li>
         <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/brand'}>Brand</Link></li>
         <li className=" cursor-pointer hover:text-gray-300">W-Style</li>
         <li className=" cursor-pointer hover:text-gray-300">View More</li>
@@ -61,6 +65,7 @@ const Navbar =(outlet) => {
     <div className=" w-fit h-fit flex gap-7  justify-center items-center font-medium text-2xl font-medium">
     <FontAwesomeIcon  icon={faHeart} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon>
+
 <Link href={'/cart'}><FontAwesomeIcon  icon={faBagShopping} className="fa-solid fa-magnifying-glass" 
 ></FontAwesomeIcon></Link>
 <div className='flex flex-col'>
@@ -73,7 +78,7 @@ const Navbar =(outlet) => {
 </Link> }
 {getState!="Login" &&
 <Popup  trigger={
-<Link href={'/Login'}>
+  <Link href={'/Login'}>
 <button className="button bg-black text-white text-md px-3 rounded-md">{getState}</button>
 </Link>
 } modal>
@@ -91,6 +96,7 @@ The website www.westside.com ("Website") is operated by Trent Limited, a company
 </div>
     </div>
     </div>
+    </>
   )
 }
 

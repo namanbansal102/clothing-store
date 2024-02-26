@@ -1,7 +1,7 @@
 'use server'
 import React from 'react'
 import ClientOrder from './ClientOrder';
-
+import PaymentComponent from './paymentComponent'
 const DataOrder =async(store) => {
     const storeo=store['store']
     var total=0;
@@ -22,7 +22,8 @@ const DataOrder =async(store) => {
      
      let myjson=await fetchData()
      const makePayment = async (FName,LName,address,city,state,pinCode,totalAmount) => {
-      console.log("Make Payment Function is Running");
+
+      console.log("Make Payment Function is Running",FName,LName,address,city,state,pinCode,totalAmount);
       const initializeRazorpay = () => {
         return new Promise((resolve) => {
           const script = document.createElement("script");
@@ -87,6 +88,7 @@ const DataOrder =async(store) => {
   return (
     <>
     <ClientOrder outlet={{meData:myjson,a:2}}></ClientOrder>
+     
     </>
   )
 }

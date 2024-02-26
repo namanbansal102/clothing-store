@@ -6,6 +6,7 @@ const NavDataComponent =async () => {
   const cookieStore = cookies()
   let myjson={success:false,data:null}
   let token = (cookieStore.get('token'))
+  console.log("In Nav Data Component Token Val is",token);
   if (token!=undefined) {
     
   
@@ -20,11 +21,11 @@ const NavDataComponent =async () => {
         body: JSON.stringify({token:tokenVal}),
       }).then((a)=>a.json()).then((json)=>{
         if (json.success==true && json.data!=null) {
-          // console.log("My json in Navbar Returning is,.,.,.,::::::::::::::::::::::::::",json);
+          console.log("My json in Navbar Returning is,.,.,.,::::::::::::::::::::::::::",json);
           myjson=json
         }else{
+          console.log("My json in Navbar Returning is,.,.,.,::::::::::::::::::::::::::",myjson);
           myjson=json
-          // console.log("My json in Navbar Returning is,.,.,.,::::::::::::::::::::::::::",myjson);
       }
   
       })}

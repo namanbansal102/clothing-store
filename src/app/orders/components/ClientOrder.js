@@ -4,7 +4,10 @@ import { redirect } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import React, { useState,useEffect, } from 'react'
 import PinCode from '../../PinCode'
+
+
 const ClientOrder = (outlet) => {
+    
     let {meData,a}=outlet['outlet']
     console.log(meData);
     const router = useRouter()
@@ -92,7 +95,9 @@ const ClientOrder = (outlet) => {
                 <input value={state}  readOnly name='state' onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3'  type="text" placeholder='State' />
             </div>
             <button disabled={disabled}  className='disabled:bg-slate-500 disabled:border-none disabled:text-white h-16 w-64 rounded-xl m-auto bg-black text-white hover:bg-white hover:text-black hover:border-2 hover:border-black' onClick={()=>{
+                a(FName,LName,address,city,state,pinCode,meData['total'])
                 }}>Continue To Shopping</button>
+               
         </div>
     </div>
     <div className="right-portion border-2   border-gray-300 rounded-2xl p-6 w-70 shadow-lg ">
@@ -102,7 +107,6 @@ const ClientOrder = (outlet) => {
             <h1 className='text-2xl  font-bold'>{element['title']}</h1>
             </div>
         })}
-        
         <div className='border-t-2 border-gay-200 w-full h-0 my-7'></div>
     <h1 className='text-2xl text-justify my-4'>Total Amount</h1>
     <h1 className='text-3xl my-3'>Rs.{meData.total}</h1>
