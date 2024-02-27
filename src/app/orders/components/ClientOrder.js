@@ -7,7 +7,70 @@ import PinCode from '../../PinCode'
 
 
 const ClientOrder = (outlet) => {
+    console.log("Outlet is:::::::::::::::::::::::::::::::::::::",outlet);
+    const makePayment = async (FName,LName,address,city,state,pinCode,totalAmount,prodInfo) => {
+
+        console.log("Make Payment Function is Running",FName,LName,address,city,state,pinCode,totalAmount);
+        const initializeRazorpay = () => {
+          return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = "https://checkout.razorpay.com/v1/checkout.js";
+            // document.body.appendChild(script);
+      
+            script.onload = () => {
+              resolve(true);
+            };
+            script.onerror = () => {
+              resolve(false);
+            };
+      
+            document.body.appendChild(script);
+          });
+        };
+          var date = new Date();
+          var hour = date.getHours();
+           var minute = date.getMinutes();
+           var second = date.getSeconds();
+          const res = await initializeRazorpay();
+          if (!res) {
+            alert("Razorpay SDK Failed to load");
+            return;
+          }
+          // Make API call to the serverless API
+          const data = await fetch("http://localhost:3000/api/paymentGate", { method: "POST",headers: {  
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({FName,LName,address,city,state,pinCode,totalAmount,prodInfo,id:a}) }).then((t) =>
+            t.json()
+          );
+          console.log(data);
+  
+          var options = {
+            key: process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
+            name: "Westide Clothing",
+            currency: "INR",
+            amount: data.amount,
+            order_id: data.id,
+            description: "Thankyou For Purchasing From Our Store",
+            image: "https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210",
+            handler: function (response) {
+              // Validate payment at server - using webhooks is a better idea.
+              router.push(`/orders/trackOrder/${response.razorpay_payment_id}`,{scroll:false})
+              alert(response.razorpay_payment_id);
+              alert(response.razorpay_order_id);
+              alert(response.razorpay_signature);
     
+            },
+            prefill: {
+              name: FName,
+              email:FName,
+              contact: "9068808000",
+            },
+          };
+      
+          const paymentObject = new window.Razorpay(options);
+          paymentObject.open();
+        };
     let {meData,a}=outlet['outlet']
     console.log(meData);
     const router = useRouter()
@@ -60,6 +123,7 @@ const ClientOrder = (outlet) => {
         }
         
     }
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>........<<<<<<<<<<<<<",a['name']);
   return (
     <div className='flex justify-around my-6 '>
          
@@ -68,7 +132,7 @@ const ClientOrder = (outlet) => {
         <h1 className='text-3xl text-gray-400'>CONTACT</h1>
         <div className="profile  flex items-center gap-7">
             <img className='h-10' src="https://cdn-icons-png.flaticon.com/128/11312/11312760.png" alt="" />
-            <h1>Naman Bansal (abc@gmail.com)</h1>
+            <h1>{(a.data)['name']} {(a.data)['email']}</h1>
         </div>
         <div className="uptoDate flex flex-row gap-3">
             <input type="checkbox" />
@@ -95,7 +159,7 @@ const ClientOrder = (outlet) => {
                 <input value={state}  readOnly name='state' onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3'  type="text" placeholder='State' />
             </div>
             <button disabled={disabled}  className='disabled:bg-slate-500 disabled:border-none disabled:text-white h-16 w-64 rounded-xl m-auto bg-black text-white hover:bg-white hover:text-black hover:border-2 hover:border-black' onClick={()=>{
-                (FName,LName,address,city,state,pinCode,meData['total'])
+                makePayment(FName,LName,address,city,state,pinCode,meData['total'],meData['items'])
                 }}>Continue To Shopping</button>
                
         </div>

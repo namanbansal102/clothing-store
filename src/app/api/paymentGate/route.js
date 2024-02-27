@@ -1,13 +1,14 @@
+import connectDb from "../../../../middleware/mongoose"
+import Orders from "../../../../models/Orders"
 const Razorpay = require("razorpay");
 const shortid = require("shortid");
-
 export async function POST(req, res) {
+  console.log("Payment Gate Route js is Running >>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<");
+  console.log("Request is::::::::::::",req);
+  const mydata=await req.json()
+  console.log("My Data is:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::",mydata);
     var date = new Date();
-    var hour = date.getHours();
-    var minute = date.getMinutes();
-    var second = date.getSeconds();
-    const mydata=await req.json()
-    const{FName,LName,address,city,state,pinCode,totalAmount}=mydata
+    const{FName,LName,address,city,state,pinCode,totalAmount,prodInfo,id}=mydata
     console.log("FName is::::",FName);
     console.log(mydata);
     // Initialize razorpay object
@@ -29,7 +30,28 @@ export async function POST(req, res) {
     };
 
     try {
+
       const response = await razorpay.orders.create(options);
+      await connectDb();
+      let arr=[]
+      for(let i=0;i<prodInfo.length;i++){
+        let element=prodInfo[i];
+        arr.push({
+          productId:element['_id'],
+          quantity:1
+        })
+      }
+      
+      let p=new Orders({
+        userEmail:(id.data)['email'],
+        OrderId:response.id,
+        address:address,
+        products:arr,
+        amount:response.amount,
+        status:"Cleared",
+
+    })
+    await p.save();
       return Response.json({
         id: response.id,
         currency: "INR",

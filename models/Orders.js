@@ -1,5 +1,6 @@
 const mongoose=require("mongoose")
 const OrderSchema=new mongoose.Schema({
+    userEmail:{type:String,required:true},
     OrderId:{type:String,required:true},
     products:[
         {productId:{type:String,required:true}

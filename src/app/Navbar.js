@@ -126,7 +126,9 @@ const [progress, setprogress] = useState(13)
     <div className=" w-fit h-fit flex gap-7  justify-center items-center font-medium text-2xl font-medium">
     <img width="30" height="30" src="https://img.icons8.com/ios/50/like--v1.png" alt="like--v1"/>
 
-    <img width="30" height="30" src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+    <Link href={'/cart'}>
+      <img width="30" height="30" src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+      </Link>
 <div className='flex flex-col'>
 <ToastContainer />
 {/* <Link href={'/Login'}>

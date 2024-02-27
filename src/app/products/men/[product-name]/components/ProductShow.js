@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import PinCode from '@/app/PinCode';
+import PinCode from '@/app/PinCodeProduct';
 import Spinner from '@/app/Spinner/Spinner';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -64,7 +64,7 @@ const ProductShow = (outlet) => {
                   <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>L</button>
                   <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>XL</button>
                 </div>
-                <PinCode />
+                <PinCode></PinCode>
                 <button disabled={disabled} onClick={handleClick} className=' bg-black h-20 w-full text-white disabled:bg-gray-700' >{show}</button>
                 <div className="mydetails">
                   <details >

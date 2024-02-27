@@ -1,6 +1,7 @@
 export async function POST(request,response){
     let pin=await request.json()
     pin=pin.pin
+    console.log("Pin is pin is pin is pin is",pin);
     let data=await fetch(`https://api.postalpincode.in/pincode/${pin}`)
 
     let json=await data.json()
