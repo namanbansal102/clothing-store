@@ -32,9 +32,9 @@ const [progress, setprogress] = useState(13)
 
   
   return (
-    <>
+    <div className='z-50'>
     <LoadingBar color="#f11946" progress={progress} onLoaderFinished={() => setprogress(0)} />
-    <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent">
+    <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent sticky top-0 bg-white">
       {/* // Left Protion */}
       <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14"></img>
       {/* Center Protion */}
@@ -96,7 +96,7 @@ The website www.westside.com ("Website") is operated by Trent Limited, a company
 </div>
     </div>
     </div>
-    </>
+    </div>
   )
 }
 

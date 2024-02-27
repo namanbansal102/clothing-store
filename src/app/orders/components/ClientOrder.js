@@ -95,7 +95,7 @@ const ClientOrder = (outlet) => {
                 <input value={state}  readOnly name='state' onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3'  type="text" placeholder='State' />
             </div>
             <button disabled={disabled}  className='disabled:bg-slate-500 disabled:border-none disabled:text-white h-16 w-64 rounded-xl m-auto bg-black text-white hover:bg-white hover:text-black hover:border-2 hover:border-black' onClick={()=>{
-                a(FName,LName,address,city,state,pinCode,meData['total'])
+                (FName,LName,address,city,state,pinCode,meData['total'])
                 }}>Continue To Shopping</button>
                
         </div>

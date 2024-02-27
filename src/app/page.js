@@ -12,7 +12,7 @@ import MyGoogle from "./MyGoogle";
 export default function Home( ) {
   
   <Script src="https://kit.fontawesome.com/70972682bd.js" strategy="lazyOnload"/>
-  googleLogout();
+  // googleLogout();
  
   
   return (

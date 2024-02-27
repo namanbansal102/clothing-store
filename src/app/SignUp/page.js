@@ -4,8 +4,12 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import ReCAPTCHA from "react-google-recaptcha";
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/navigation'
 const page = () => {
+  const router= useRouter()
+    const [disabled, setdisabled] = useState(true)
     const [email, setemail] = useState(null);
     const [password, setpassword] = useState(null);
     const [name, setname] = useState(null);
@@ -23,6 +27,11 @@ const page = () => {
             setpassword(e.target.value)
         }
     }
+    function onChange(value) {
+      console.log("Captcha value:", value);
+      setdisabled(false)
+    }
+    
     const handleClick=()=>{
         console.log("Handle Click is Running");
         console.log(email);
@@ -34,7 +43,9 @@ const page = () => {
       },
       body: JSON.stringify({name,email,password}),
     }).then((a)=>a.json()).then((json)=>{
+      
       if (json.success==true && json.token!=null) {
+
         toast("Sign Up Successfully!");
         document.cookie=`token=${JSON.stringify(json['token'])}`;
         console.log("Sign Up Successfully");
@@ -69,10 +80,17 @@ const page = () => {
                 <h1 className='text-xl my-2 '>Enter password</h1>
                 <input name='password' onChange={handleChange} typeof='password' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Password Please' />
                 <br />
-                <button onClick={handleClick} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl'>Sign Up</button>
+                <div className='my-4'>
+                <ReCAPTCHA
+    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}
+    onChange={onChange}
+    />
+    </div>
+                <button disabled={disabled} onClick={handleClick} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl disabled:bg-slate-700 disabled:cursor-not-allowed disabled:text-white'>Sign Up</button>
                 <h1 className='text-center'><Link href={'/Login'}><u>Want's to Login</u>
                 </Link>
                 </h1>
+                
                 <div className='flex'>
 <div className=' w-16'></div>
                 <GoogleLogin 
@@ -87,8 +105,12 @@ const page = () => {
   }}
 />
   </div>
+  
+ 
+  
             </div>
         </div>
+     
         <ToastContainer />
     </div>
   )

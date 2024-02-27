@@ -3,9 +3,9 @@ import User  from "../../../../models/User"
 import { NextResponse } from "next/server";
 var CryptoJS = require("crypto-js");
 const jwt=require('jsonwebtoken')
-import { useRouter } from 'next/navigation'
+
 export async function POST(request,response){
-    try{ const router= useRouter()
+    try{
         
         let make=await request.json()
         console.log(make);

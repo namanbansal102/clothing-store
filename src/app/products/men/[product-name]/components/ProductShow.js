@@ -2,21 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import PinCode from '@/app/PinCode';
 import Spinner from '@/app/Spinner/Spinner';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
+import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 const ProductShow = (outlet) => {
-  // useEffect(() => {
-  //   var myCookies = getCookies();
-  //   console.log("myCookies are:",myCookies);
-  //   const id=prop._id
-  //   if (myCookies[`${".westside." + id.substring(0, 10) + "_1"}`]) {
-  //       setShow("ALREADY IN BAG")
-  //         setDisabled(true);
-  //   }
-  
-   
-  // }, [])
+ 
   var getCookies = function(){
     var pairs = document.cookie.split(";");
     var cookies = {};
@@ -37,15 +27,15 @@ const ProductShow = (outlet) => {
    
     
    
-    const handleClick = (e) => {
+    const handleClick =async  () => {
       console.log("Handle Click is Running",prop._id);
-          const id=prop._id
-          e.target.classList.toggle('change')
-         
-          document.cookie = `${".westside." + id.substring(0, 10) + "_1"}=${JSON.stringify(id)}`;
-          setShow("ALREADY IN BAG")
-          setDisabled(true);
-          toast("Item Added To Cart");
+      const id=prop._id
+      
+      
+      document.cookie = `${".westside." + id.substring(0, 10) + "_1"}=${JSON.stringify(id)}`;
+      toast('Item Added To Cart');
+      setShow("ALREADY IN BAG")
+      setDisabled(true);
         
       };
     
@@ -92,9 +82,33 @@ const ProductShow = (outlet) => {
           <div className="lower-similar-portion mx-11 my-4">
             <h1 className='text-2xl'>Similar Products</h1>
             <div className="similar-products flex">
+            <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+
+    // Default options for specific types
+    success: {
+      duration: 3000,
+      theme: {
+        primary: 'green',
+        secondary: 'black',
+      },
+    },
+  }}
+/>
             </div>
           </div>
-          <ToastContainer />
         </div>
       {/* {!product && (
         <div className='h-full w-full flex justify-center items-center'>

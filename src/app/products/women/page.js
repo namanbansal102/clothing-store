@@ -6,7 +6,15 @@ import Product from '@/app/Productcard'
 const page = async () => {
   
   let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProductsWomen`)
+  let newPromise =  
+  new Promise(function (resolve, reject) { 
+  setTimeout(function () { 
+      resolve("Hello Geeks. Wrapped  setTimeout() in a promise"); 
+  }, 1000); 
+}); 
+let result = await newPromise; 
   let json=await data.json()
+  
     return (
       <div className=' grid grid-cols-4 gap-4 '>
         {json['products'].map((element)=>{
