@@ -41,12 +41,12 @@ const Navbar =(outlet) => {
   const [typeDis, settypeDis] = useState(false)
   const [search, setsearch] = useState("")
   const handleSearch=(e)=>{
-    console.log("handleSearch is Running");
-    console.log(e.target.value);
+    // console.log("handleSearch is Running");
+    // console.log(e.target.value);
     settypeDis(true)
     setsearch(e.target.value)
     if (e.target.value="") {
-      console.log("If Condtion Satisfied");
+      // console.log("If Condtion Satisfied");
       if (e.target.value="") {
         settypeDis(true)
         settypeDis(false)

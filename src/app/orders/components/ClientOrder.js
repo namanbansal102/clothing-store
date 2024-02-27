@@ -55,7 +55,7 @@ const ClientOrder = (outlet) => {
             image: "https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210",
             handler: function (response) {
               // Validate payment at server - using webhooks is a better idea.
-              router.push(`/orders/trackOrder/${response.razorpay_payment_id}`,{scroll:false})
+              router.push(`/orders/trackOrder/${response.razorpay_order_id}`,{scroll:false})
               alert(response.razorpay_payment_id);
               alert(response.razorpay_order_id);
               alert(response.razorpay_signature);

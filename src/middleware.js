@@ -4,7 +4,7 @@ import { decode } from "jsonwebtoken";
 // This function can be marked `async` if using `await` inside
 export async function middleware(req,res) {
  try {
-  console.log("middleware:::::::::::::::::::::::::");
+  // console.log("middleware:::::::::::::::::::::::::");
   const requestHeaders = new Headers(req.headers);
   // add field to request headers
   let cookie=req.cookies
@@ -15,14 +15,14 @@ export async function middleware(req,res) {
     query=query.split('"')
     query=query[1]
   }
-  console.log("Middle Ware Query is:::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",query);
+  // console.log("Middle Ware Query is:::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",query);
   if (query==null && !req.nextUrl.pathname.startsWith('/Login') && !req.nextUrl.pathname.startsWith('/SignUp')) {
     // return NextResponse.json({hello:"query==null"})    
     return NextResponse.redirect(new URL('/', req.url))   
   }
   let token =query;
   if (token.length>200) {
-    console.log("If Condtion Runnign");
+    // console.log("If Condtion Runnign");
     let decrypted=await decode(token)
     // decrypted=JSON.stringify(decrypted)
     const payload={name:decrypted.name,
@@ -31,7 +31,7 @@ export async function middleware(req,res) {
                 nat:decrypted['iat'],
                 nbf:decrypted['nbf'],
             }
-    console.log(decrypted+">>>>>>>>>>>>>>>>>>>>>>>");
+    // console.log(decrypted+">>>>>>>>>>>>>>>>>>>>>>>");
     
 }else{
   
@@ -43,7 +43,7 @@ export async function middleware(req,res) {
   }
         // return NextResponse.redirect(new URL(req.nextUrl, req.url))   
   } catch (error) {
-    console.log("Error is:",error);
+    // console.log("Error is:",error);
     if (!req.nextUrl.pathname.startsWith('/Login') && !req.nextUrl.pathname.startsWith('/SignUp')) {  
       return NextResponse.redirect(new URL('/Login', req.url))    
     }       

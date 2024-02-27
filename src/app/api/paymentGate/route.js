@@ -41,7 +41,7 @@ export async function POST(req, res) {
           quantity:1
         })
       }
-      
+      console.log("Response is::::::::::::::::::::::::::::",response);
       let p=new Orders({
         userEmail:(id.data)['email'],
         OrderId:response.id,
