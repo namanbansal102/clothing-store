@@ -1,12 +1,37 @@
 'use client'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PinCode from '@/app/PinCodeProduct';
 import Spinner from '@/app/Spinner/Spinner';
 
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+
 import 'react-toastify/dist/ReactToastify.css';
 import toast, { Toaster } from 'react-hot-toast';
+import Link from 'next/link';
+import Product from '@/app/Productcard';
+
 const ProductShow = (outlet) => {
- 
+  function useHorizontalScroll() {
+    const elRef = useRef();
+    useEffect(() => {
+      const el = elRef.current;
+      if (el) {
+        const onWheel = e => {
+          if (e.deltaY == 0) return;
+          e.preventDefault();
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY,
+            behavior: "smooth"
+          });
+        };
+        el.addEventListener("wheel", onWheel);
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, []);
+    return elRef;
+  }
+  const child   = { width: `30em`, height: `100%`}
+    const parent  = { width: `60em`, height: `100%`}
   var getCookies = function(){
     var pairs = document.cookie.split(";");
     var cookies = {};
@@ -16,9 +41,12 @@ const ProductShow = (outlet) => {
     }
     return cookies;
   }
-    console.log(outlet);
+    console.log("My Outlet is::::::::",outlet);
     const [product, setProduct] = useState(null);
-    let prop=outlet['outlet']
+    let outcome=(outlet.outlet).outData
+    const similar=(outlet.outlet).fetchSimilar
+    let prop=outcome
+    
 
     console.log(product);
     const [show, setShow] = useState("ADD TO BAG");
@@ -38,11 +66,12 @@ const ProductShow = (outlet) => {
       setDisabled(true);
         
       };
-    
+    console.log("Prop is::::",prop);
   return (
     <>
      
         <div>
+        
           <div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around">
 
             <div className="left-portion  w-fit flex gap-9 ">
@@ -51,7 +80,7 @@ const ProductShow = (outlet) => {
             </div>
             <div className="right-portion   my-37 w-45 text-justify ">
               <div className="right-portion-upper text-xl leading-10">
-                <h1 className='font-thin text-gray-300'>{prop.categories}</h1>
+                <h1 className='font-thin text-gray-300'>{prop.category}</h1>
                 <h1>{prop.title}</h1>
                 <h1>RS.{prop.price} (Inclusive of All Taxes)</h1>
                 <hr />
@@ -81,7 +110,6 @@ const ProductShow = (outlet) => {
           </div>
           <div className="lower-similar-portion mx-11 my-4">
             <h1 className='text-2xl'>Similar Products</h1>
-            <div className="similar-products flex">
             <Toaster
   position="top-center"
   reverseOrder={false}
@@ -96,7 +124,7 @@ const ProductShow = (outlet) => {
       background: '#363636',
       color: '#fff',
     },
-
+    
     // Default options for specific types
     success: {
       duration: 3000,
@@ -107,6 +135,14 @@ const ProductShow = (outlet) => {
     },
   }}
 />
+          <div ref={useHorizontalScroll()} style={{ overflow: "auto" }} className="similar-products flex gap-1 justify-center items-center overflow-x-auto my-8 no-scrollbar ">
+         
+          
+          
+            {similar.map((element)=>{
+              return <Link scroll={true} href={`http://localhost:3000/products/men/${(element['title'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;})}
+        
+             
             </div>
           </div>
         </div>

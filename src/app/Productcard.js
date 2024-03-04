@@ -9,7 +9,7 @@ const Product = (props) => {
   return (
     <>
     
-    <div className="div-card  w-fit my-4 mx-9 cursor-pointer shadow-xl hover:scale-105 transition-all duration-500">
+    <div className="div-card  w-72 my-4 mx-9 cursor-pointer shadow-xl hover:scale-105 transition-all duration-500">
         
         <img className='h-96' src={img} alt="" srcset="" />
         <div className="lower-card-portion">

@@ -25,8 +25,9 @@ export default function RootLayout({ children }) {
       <Head>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </Head>
-      <body className={inter.className}>
-        
+      <body className={inter.className} >
+        <div className="overflow-hidden">
+
       <NextTopLoader
       color="#F62B00"
       initialPosition={0.08}
@@ -41,7 +42,9 @@ export default function RootLayout({ children }) {
       <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'
       zIndex={1600}
       showAtBottom={false} />
-        <NavDataComponent></NavDataComponent>{children}<Footer></Footer></body>
+        <NavDataComponent></NavDataComponent>{children}<Footer></Footer>
+      </div>
+        </body>
     </html>
     </GoogleOAuthProvider>
   );

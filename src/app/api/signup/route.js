@@ -4,8 +4,10 @@ import { NextResponse } from "next/server";
 var CryptoJS = require("crypto-js");
 const jwt=require('jsonwebtoken')
 
+import { POST as naman }  from "../genOtp/route";
 export async function POST(request,response){
     try{
+        console.log("POst is pos tis");
         
         let make=await request.json()
         console.log(make);
@@ -20,9 +22,10 @@ export async function POST(request,response){
             email:make.email,
             password:cipherpass,
             img:img
-        })
-        await u.save();
-        const token=jwt.sign({success:true,email:make.email,name:make.name},process.env.JWT_SECRET)
+          })
+
+        // await u.save();
+        const token=jwt.sign({success:true,email:make.email,name:make.name,otp:2},process.env.JWT_SECRET)
         return Response.json({success:true,token},{status:200})
     }catch(error){
         console.log(error);

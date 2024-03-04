@@ -4,6 +4,7 @@ const UsersSchema=new mongoose.Schema({
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true},
     img:{type:String,default:"https://cdn-icons-png.flaticon.com/128/1077/1077012.png"},
+    otp:{type:Number,default:null},
     orders:[{type:Object,default:0}]
 
 },{timestamps:true})

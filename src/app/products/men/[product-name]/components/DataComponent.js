@@ -1,9 +1,10 @@
 'use server'
 
+import { patchFetch } from "next/dist/server/app-render/entry-base";
 import ProductShow from "./ProductShow";
 
 const DataComponent =async (outlet) => {
-  console.log("query in Data Component is:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+outlet);
+  console.log("query in Data Component is:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+JSON.stringify(outlet));
     const fetchData = async () => {
         try {
           console.log("Fetch Data Function Running ..........................");
@@ -26,17 +27,38 @@ const DataComponent =async (outlet) => {
           console.error("Error fetching data:", error);
         }
       };
+      const fetchSimilarProducts=async (params)=>{
+        console.log("Params in Function are:::::",typeof params);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getSimilarProducts`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ data: params}),
+        });
+        const newData = await response.json();
+        console.log(newData);
+        if (newData.status === true && newData.myproduct != null) {
+          const productData = newData.myproduct;
+          return productData;  
+        } else {
+          console.log("Json Not Found");
+        }
+      }
       let newPromise =  
                 new Promise(function (resolve, reject) { 
                 setTimeout(function () { 
                     resolve("Hello Geeks. Wrapped  setTimeout() in a promise"); 
-                }, 1000); 
+                }, 500); 
             }); 
             let result = await newPromise; 
       let outData=await fetchData();
+      console.log("OutData is::::::::::::::::::::::::::",outData);
+      let fetchSimilar=await fetchSimilarProducts(outData);
+      console.log("My Fetch Similar In Main Page is",fetchSimilar);
   return (
     <>
-    <ProductShow outlet={outData}></ProductShow>
+    <ProductShow outlet={{outData,fetchSimilar}}></ProductShow>
     </>
   )
 }
