@@ -4,7 +4,7 @@ import { patchFetch } from "next/dist/server/app-render/entry-base";
 import ProductShow from "./ProductShow";
 
 const DataComponent =async (outlet) => {
-  console.log("query in Data Component is:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+JSON.stringify(outlet));
+ 
     const fetchData = async () => {
         try {
           console.log("Fetch Data Function Running ..........................");
@@ -28,7 +28,7 @@ const DataComponent =async (outlet) => {
         }
       };
       const fetchSimilarProducts=async (params)=>{
-        console.log("Params in Function are:::::",typeof params);
+        
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getSimilarProducts`, {
           method: 'POST',
           headers: {
@@ -37,7 +37,7 @@ const DataComponent =async (outlet) => {
           body: JSON.stringify({ data: params}),
         });
         const newData = await response.json();
-        console.log(newData);
+        
         if (newData.status === true && newData.myproduct != null) {
           const productData = newData.myproduct;
           return productData;  
@@ -53,9 +53,9 @@ const DataComponent =async (outlet) => {
             }); 
             let result = await newPromise; 
       let outData=await fetchData();
-      console.log("OutData is::::::::::::::::::::::::::",outData);
+      
       let fetchSimilar=await fetchSimilarProducts(outData);
-      console.log("My Fetch Similar In Main Page is",fetchSimilar);
+      
   return (
     <>
     <ProductShow outlet={{outData,fetchSimilar}}></ProductShow>

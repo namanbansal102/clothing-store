@@ -3,9 +3,9 @@ import { useSearchParams } from 'next/navigation'
 import React from 'react'
 const Product = (props) => {
   const outlet=props.outletName
-  console.log(outlet);
+ 
   let {title,slug,desc,img,category,size,quantity,price}=outlet
-  console.log("................",outlet.title)
+
   return (
     <>
     

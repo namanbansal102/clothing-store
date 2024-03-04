@@ -41,7 +41,7 @@ const ProductShow = (outlet) => {
     }
     return cookies;
   }
-    console.log("My Outlet is::::::::",outlet);
+    
     const [product, setProduct] = useState(null);
     let outcome=(outlet.outlet).outData
     const similar=(outlet.outlet).fetchSimilar

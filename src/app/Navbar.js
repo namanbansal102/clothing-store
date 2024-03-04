@@ -72,7 +72,7 @@ const [progress, setprogress] = useState(13)
 
   
   return (
-    <div className='z-50 bg-white sticky top-0 '>
+    <div className='z-50 bg-transparent sticky top-0 '>
    
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent ">
       {/* // Left Protion */}
