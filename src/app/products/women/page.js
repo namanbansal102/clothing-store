@@ -2,6 +2,7 @@ import React from 'react'
 
 import Link from 'next/link'
 import Product from '@/app/Productcard'
+import FilterBar from '@/app/FilterBar'
 
 const page = async () => {
   
@@ -16,11 +17,11 @@ let result = await newPromise;
   let json=await data.json()
   
     return (
-      <div className=' grid grid-cols-4 gap-4 '>
-        {json['products'].map((element)=>{
-          return <Link href={`women/${(element['slug'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;
-        })}
+      <>
+      <div>
+        <FilterBar outlet={json['products']}></FilterBar>
         </div>
+        </>
   )
 }
 

@@ -124,9 +124,10 @@ const [progress, setprogress] = useState(13)
       </div>
     {/* Right Portion */}
     <div className=" w-fit h-fit flex gap-7  justify-center items-center font-medium text-2xl font-medium">
+    <Link className='cursor-pointer' href={'/wishlist'}>
     <img width="30" height="30" src="https://img.icons8.com/ios/50/like--v1.png" alt="like--v1"/>
-
-    <Link href={'/cart'}>
+    </Link>
+    <Link className='cursor-pointer' href={'/cart'}>
       <img width="30" height="30" src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="shopping-cart--v1"/>
       </Link>
 <div className='flex flex-col'>
@@ -135,12 +136,12 @@ const [progress, setprogress] = useState(13)
 <button className="button bg-black text-white text-md px-3 rounded-md">{getState}</button>
 </Link> */}
 {getState=="Login" && <Link href={'/Login'}>
-<button className="button  text-black text-md px-3 rounded-md font-light">{getState}</button>
+<button className="cursor-pointer button  text-black text-md px-3 rounded-md font-light">{getState}</button>
 </Link> }
 {getState!="Login" &&
 <Popup  trigger={
   <Link href={'/Login'}>
-<button className="button text-black text-md px-3 rounded-md font-light">{getState}</button>
+<button className="cursor-pointer button text-black text-md px-3 rounded-md font-light">{getState}</button>
 </Link>
 } modal>
     <span className=' flex bg-white flex-col gap-6 rounded-sm  '>

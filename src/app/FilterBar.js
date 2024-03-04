@@ -3,13 +3,15 @@ import React, { useState } from 'react'
 import { BsFillGrid3X3GapFill } from "react-icons/bs";
 import Product from './Productcard';
 import Link from 'next/link';
+import Sidebar from './Sidebar';
+
 const FilterBar = (params) => {
   const arr=params.outlet
   
   const [myarr, setmyarr] = useState(arr)
   const [change, setchange] = useState(50)
   const [loading, setloading] = useState(false)
-  
+  const [boxClick, setBoxClick] = useState(false)
 let k=arr
   const handleChange=async (e)=>{
     setchange(e.target.value)
@@ -38,18 +40,38 @@ let result = await newPromise;
         console.log("Our k Array is",myarr);
         
     } 
+    const handleSort=()=>{
+      console.log("Handle Sort Is Running");
+
+    }
+    const handleLower=(e)=>{
+      console.log("Handle Lower is Running`");
+      setBoxClick(e.target.value)
+      console.log(e.target.value);
+    }
   return (
     <>
-    <div className='ml-[63vw]'>
+  
+    <div className='ml-[53vw]'>
     <div className="mysearchbar flex justify-center items-center gap-5 my-6">
-    <h1 className='text-gray-300'>Filter</h1>
+    
         <BsFillGrid3X3GapFill />
     <div className='mb-2'>
-
         <input value={change} onChange={handleChange} className='w-96 appearance-none bg-black myrange' type="range" />
     </div>
+    <h1 className='text-gray-300 underline cursor-pointer hover:text-black'>Filter</h1>
+    <div className="1st-div flex gap-2">
+    <input type="checkbox" />
+    <h1 className='text-gray-300 cursor-pointer hover:text-black'>H-L</h1>
     </div>
+    <div className="2nd-div flex gap-2">
+    <input onChange={handleLower} value={boxClick} type="checkbox" />
+    <h1 className='text-gray-300 cursor-pointer hover:text-black'>L-H</h1>
     </div>
+    {/* <Sidebar /> */}
+    
+    </div>
+    </div>  
     {myarr.length==0 && <div className=''>
          <img className='h-52 m-auto' src="https://assets-v2.lottiefiles.com/a/0e30b444-117c-11ee-9b0d-0fd3804d46cd/BkQxD7wtnZ.gif"  />
         </div>
