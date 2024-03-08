@@ -14,7 +14,7 @@ import ReactSearchBox from "react-search-box";
 
 import Link from "next/link";
 import React, { useState,useEffect } from "react";
-import { useRouter} from 'next/navigation';    
+import { usePathname, useRouter} from 'next/navigation';    
 import PopNav from './PopNav';
 
 import Search from './components/search/search';
@@ -24,6 +24,7 @@ const Navbar =(outlet) => {
 
   const [typeDis, settypeDis] = useState(false)
   const [search, setsearch] = useState("")
+   
   const handleSearch=(e)=>{
     // console.log("handleSearch is Running");
     // console.log(e.target.value);
@@ -40,6 +41,9 @@ const Navbar =(outlet) => {
     }
   }
   const router = useRouter();
+  const pathname = usePathname()
+
+  console.log("My Router PathName is my Router PathName is:::::",pathname);
   let prop=(outlet['outlet'])
   let getState="Login"
   if (prop['success']) {
@@ -58,7 +62,7 @@ const [input, setInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   
   return (
-    <div className='z-50 bg-white sticky top-0 '>
+    <div className={`z-50 sticky top-0 ${pathname=='/'?'bg-transparent':'bg-white'}`}>
    
   
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent ">

@@ -14,11 +14,11 @@ const CartClient = (outlet) => {
     const [discount, setdiscount] = useState(0)
   return (
     <>
-    {json==undefined && <div className='h-full w-full flex justify-around my-10 items-center flex-col gap-9'><img src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="" /><h1 className='text-5xl font-bold' >YOUR CART IS EMPTY</h1></div>}
-    {json!=undefined && <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
+    {json.length==0 && <div className='h-full w-full flex justify-around my-10 items-center flex-col gap-9'><img src="https://bakestudio.in/assets/images/cart/empty-cart.gif" alt="" /><h1 className='text-5xl font-bold' >YOUR CART IS EMPTY</h1></div>}
+    {json.length!=0 && <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
       <div className="whole-cart-big w-fit px-4  rounded-2xl shadow-md">
       <div className="cart-head flex items-center flex-col ">
-      <div className="cart-head-right text-3xl my-3">Shopping Bag (03)</div>
+      <div className="cart-head-right text-3xl my-3">Shopping Bag</div>
       <div className="card-head-left">
       <ul className='flex gap-5 items-center '>
       <li><button className='bg-black w-8 h-8 text-white my-2 mx-2'>1</button>Bag </li>

@@ -48,7 +48,7 @@ const DataComponent =async (outlet) => {
                 new Promise(function (resolve, reject) { 
                 setTimeout(function () { 
                     resolve("Hello Geeks. Wrapped  setTimeout() in a promise"); 
-                }, 500); 
+                }, 100); 
             }); 
             let result = await newPromise; 
       let outData=await fetchData();
