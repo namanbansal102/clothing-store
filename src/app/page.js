@@ -1,6 +1,9 @@
 'use client'
 // import Image from "next/image";
 import Script from "next/script";
+// import { Crisp } from "crisp-sdk-web";
+import Crisp from "crisp-react";
+
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 // import Link from "next/link";
@@ -18,6 +21,9 @@ export default function Home( ) {
   
   return (
    <>
+   {/* <Script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="a51dc7c3-9789-4335-8fad-43da356a5d4b";(function(){d=document
+   ;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s)})();</Script> */}
+
     <Carousel autoPlay={true} autoFocus={true} emulateTouch={true} infiniteLoop={true}>
     <div className="h-screen bg-[url('https://www.westside.com/cdn/shop/files/WESTERN-1_95b35468-f0c3-4393-819b-461ea9c7015d.jpg?v=1706342919')] bg-center bg-cover">
    </div>
@@ -42,6 +48,7 @@ export default function Home( ) {
    <div className="fourth-image">
     <img src="https://www.westside.com/cdn/shop/files/WS_Web_Hero_Banner_04_2945ec97-3eb4-4ddd-a080-a58c64aac7d1.jpg?v=1697194912" alt=""  />
    </div>
+<Crisp crispWebsiteId={process.env.NEXT_PUBLIC_CRISP_ID} />
    </>
   );
 }

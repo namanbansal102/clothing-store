@@ -30,20 +30,11 @@ const ProductShow = (outlet) => {
     }, []);
     return elRef;
   }
-  const child   = { width: `30em`, height: `100%`}
-    const parent  = { width: `60em`, height: `100%`}
-  var getCookies = function(){
-    var pairs = document.cookie.split(";");
-    var cookies = {};
-    for (var i=0; i<pairs.length; i++){
-      var pair = pairs[i].split("=");
-      cookies[(pair[0]+'').trim()] = unescape(pair.slice(1).join('='));
-    }
-    return cookies;
-  }
+
     
     const [product, setProduct] = useState(null);
     let outcome=(outlet.outlet).outData
+    console.log("My outcome my outcome my outcome::::::::::::::::::::",outcome);
     const similar=(outlet.outlet).fetchSimilar
     let prop=outcome
     
@@ -136,9 +127,6 @@ const ProductShow = (outlet) => {
   }}
 />
           <div ref={useHorizontalScroll()} style={{ overflow: "auto" }} className="similar-products flex gap-1 justify-center items-center overflow-x-auto my-8 no-scrollbar ">
-         
-          
-          
             {similar.map((element)=>{
               return <Link scroll={true} href={`http://localhost:3000/products/men/${(element['title'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;})}
         

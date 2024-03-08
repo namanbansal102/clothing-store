@@ -1,34 +1,43 @@
 'use client'
-import React, { useEffect, useState } from 'react';
-import PinCode from '@/app/PinCode';
+import React, { useEffect, useRef, useState } from 'react';
+import PinCode from '@/app/PinCodeProduct';
 import Spinner from '@/app/Spinner/Spinner';
-import { ToastContainer, toast } from 'react-toastify';
+
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+
 import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
+import Link from 'next/link';
+import Product from '@/app/Productcard';
 
 const ProductShow = (outlet) => {
-  // useEffect(() => {
-  //   var myCookies = getCookies();
-  //   console.log("myCookies are:",myCookies);
-  //   const id=prop._id
-  //   if (myCookies[`${".westside." + id.substring(0, 10) + "_1"}`]) {
-  //       setShow("ALREADY IN BAG")
-  //         setDisabled(true);
-  //   }
-  
-   
-  // }, [])
-  var getCookies = function(){
-    var pairs = document.cookie.split(";");
-    var cookies = {};
-    for (var i=0; i<pairs.length; i++){
-      var pair = pairs[i].split("=");
-      cookies[(pair[0]+'').trim()] = unescape(pair.slice(1).join('='));
-    }
-    return cookies;
+  function useHorizontalScroll() {
+    const elRef = useRef();
+    useEffect(() => {
+      const el = elRef.current;
+      if (el) {
+        const onWheel = e => {
+          if (e.deltaY == 0) return;
+          e.preventDefault();
+          el.scrollTo({
+            left: el.scrollLeft + e.deltaY,
+            behavior: "smooth"
+          });
+        };
+        el.addEventListener("wheel", onWheel);
+        return () => el.removeEventListener("wheel", onWheel);
+      }
+    }, []);
+    return elRef;
   }
-    console.log(outlet);
+
+    
     const [product, setProduct] = useState(null);
-    let prop=outlet['outlet']
+    let outcome=(outlet.outlet).outData
+    console.log("My outcome my outcome my outcome::::::::::::::::::::",outcome);
+    const similar=(outlet.outlet).fetchSimilar
+    let prop=outcome
+    
 
     console.log(product);
     const [show, setShow] = useState("ADD TO BAG");
@@ -37,22 +46,23 @@ const ProductShow = (outlet) => {
    
     
    
-    const handleClick = (e) => {
+    const handleClick =async  () => {
       console.log("Handle Click is Running",prop._id);
-          const id=prop._id
-          e.target.classList.toggle('change')
-         
-          document.cookie = `${".westside." + id.substring(0, 10) + "_1"}=${JSON.stringify(id)}`;
-          setShow("ALREADY IN BAG")
-          setDisabled(true);
-          toast("Item Added To Cart");
+      const id=prop._id
+      
+      
+      document.cookie = `${".westside." + id.substring(0, 10) + "_1"}=${JSON.stringify(id)}`;
+      toast('Item Added To Cart');
+      setShow("ALREADY IN BAG")
+      setDisabled(true);
         
       };
-    
+    console.log("Prop is::::",prop);
   return (
     <>
      
         <div>
+        
           <div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around">
 
             <div className="left-portion  w-fit flex gap-9 ">
@@ -61,7 +71,7 @@ const ProductShow = (outlet) => {
             </div>
             <div className="right-portion   my-37 w-45 text-justify ">
               <div className="right-portion-upper text-xl leading-10">
-                <h1 className='font-thin text-gray-300'>{prop.categories}</h1>
+                <h1 className='font-thin text-gray-300'>{prop.category}</h1>
                 <h1>{prop.title}</h1>
                 <h1>RS.{prop.price} (Inclusive of All Taxes)</h1>
                 <hr />
@@ -74,7 +84,7 @@ const ProductShow = (outlet) => {
                   <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>L</button>
                   <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>XL</button>
                 </div>
-                <PinCode />
+                <PinCode></PinCode>
                 <button disabled={disabled} onClick={handleClick} className=' bg-black h-20 w-full text-white disabled:bg-gray-700' >{show}</button>
                 <div className="mydetails">
                   <details >
@@ -91,10 +101,38 @@ const ProductShow = (outlet) => {
           </div>
           <div className="lower-similar-portion mx-11 my-4">
             <h1 className='text-2xl'>Similar Products</h1>
-            <div className="similar-products flex">
+            <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+    
+    // Default options for specific types
+    success: {
+      duration: 3000,
+      theme: {
+        primary: 'green',
+        secondary: 'black',
+      },
+    },
+  }}
+/>
+          <div ref={useHorizontalScroll()} style={{ overflow: "auto" }} className="similar-products flex gap-1 justify-center items-center overflow-x-auto my-8 no-scrollbar ">
+            {similar.map((element)=>{
+              return <Link scroll={true} href={`http://localhost:3000/products/women/${(element['title'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;})}
+        
+             
             </div>
           </div>
-          <ToastContainer />
         </div>
       {/* {!product && (
         <div className='h-full w-full flex justify-center items-center'>

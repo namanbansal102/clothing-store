@@ -3,41 +3,25 @@ import { TypeAnimation } from 'react-type-animation';
 import Popup from 'reactjs-popup';
 import  LoadingBar  from "react-top-loading-bar";
 import 'reactjs-popup/dist/index.css';
+
 import Image from "next/image";
 import Script from "next/script";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping, faCartShopping, faCheck, faHeart, faL, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ReactSearchBox from "react-search-box";
 
 import Link from "next/link";
 import React, { useState,useEffect } from "react";
 import { useRouter} from 'next/navigation';    
 import PopNav from './PopNav';
+
+import Search from './components/search/search';
 const Navbar =(outlet) => {
-  const data = [
-    {
-      key: "john",
-      value: "John Doe",
-    },
-    {
-      key: "jane",
-      value: "Jane Doe",
-    },
-    {
-      key: "mary",
-      value: "Mary Phillips",
-    },
-    {
-      key: "robert",
-      value: "Robert",
-    },
-    {
-      key: "karius",
-      value: "Karius",
-    },
-  ];
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState([]);
+
   const [typeDis, settypeDis] = useState(false)
   const [search, setsearch] = useState("")
   const handleSearch=(e)=>{
@@ -51,6 +35,7 @@ const Navbar =(outlet) => {
         settypeDis(true)
         settypeDis(false)
       }
+      
       
     }
   }
@@ -69,11 +54,13 @@ const [progress, setprogress] = useState(13)
 
 // Force refresh the page
 
-
+const [input, setInput] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   
   return (
-    <div className='z-50 bg-transparent sticky top-0 '>
+    <div className='z-50 bg-white sticky top-0 '>
    
+  
     <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent ">
       {/* // Left Protion */}
       <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14"></img>
@@ -81,13 +68,18 @@ const [progress, setprogress] = useState(13)
       <div >
 
       <div className="outerClass flex  justify-start px-6 items-center p-1 border-[1.5px] border-black rounded-3xl my-2 h-14">
+        
       
-<div hidden={typeDis}>
+<div className='' hidden={typeDis} on onClick={()=>{
+  console.log("OnClick Function is Running");
+  settypeDis(true)
+ }}>
+  
 <TypeAnimation
       sequence={[
         // Same substring at the start will only be typed out once, initially
         'Search For SweatShirts',
-        1000, // wait 1s before replacing "Mice" with "Hamsters"
+        1000,
         'Search For Casuals',
         1000,
         'Search For Western Wears',
@@ -99,13 +91,49 @@ const [progress, setprogress] = useState(13)
       style={{ fontSize: '1em' }}
       repeat={Infinity}
       />
+      
       </div>
-      <div hidden={true} className="automate-search-box my-8 border-2 border-black">
+      <div hidden={!typeDis} onMouseLeave={()=>{
+        console.log("leaving My Mouse");
+        setTimeout(() => {
+          
+          setShowPopup(false)
+          settypeDis(false)
+        }, 300);
 
+      }}  className="automate-search-box my-8 bg-black">
+
+      {/* <input onChange={handleSearch} value={search}  type="text" placeholder='' /> */}
+    
+
+      <Search
       
-        </div>
-      <input onChange={handleSearch} value={search} className=" h-12  border-2 border-none font-extralight w-full border-2 border-black w-[623px] outline-none rounded-xl font-medium text-xl bg-transparent placeholder-blacka absolute" type="text" placeholder='' />
+      value={input}
+      popup={showPopup}
+      mytype={settypeDis}
+      onChange={(e) => {
+        setInput(e.target.value)
+        
+    setsearch(e.target.value)
+    if (e.target.value="") {
+      // console.log("If Condtion Satisfied");
+      if (e.target.value="") {
+        settypeDis(true)
+        settypeDis(false)
+      }}
+
+
+
+      }}
+      setPopup={() => {
+        setShowPopup(true);
+      }}
+      closePopup={() => {
+        setShowPopup(false);
+      }}
+      />
       
+      </div>
      </div>
      {/* Center Lowest Portion */}
      <div>

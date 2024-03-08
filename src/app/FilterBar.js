@@ -7,7 +7,7 @@ import Sidebar from './Sidebar';
 
 const FilterBar = (params) => {
   const arr=params.outlet
-  
+  console.log("Arr in Client side is:",arr);
   const [myarr, setmyarr] = useState(arr)
   const [change, setchange] = useState(50)
   const [loading, setloading] = useState(false)
@@ -84,7 +84,7 @@ let result = await newPromise;
         
       {myarr.length!=0 && <div className=' grid grid-cols-4 gap-4'>
         {myarr.map((element)=>{
-          return <Link href={`men/${(element['slug'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;
+          return <Link  href={`${element['size'].split("_")[0]}/${(element['slug'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;
         })}
         
         </div>

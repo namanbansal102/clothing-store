@@ -23,6 +23,154 @@
     height: 0.7rem;
     width: 0.5rem;    
  }
+ .form {
+  display: flex;
+ 
+  flex-direction: column;
+  margin-top: 0.8rem;
+  z-index: 10;
+  margin-left: 0rem;
+  /* border: 2px solid black; */
+}
+
+.child-input-container {
+  width: 88%;
+  max-width: 100%;
+}
+
+.form .input-container {
+  width: 650px;
+  max-width: 100%;
+  /* border: 1px solid #0055ff; */
+  display: flex;
+  align-items: center;
+  height: 54px;
+}
+
+.form .input-container .input {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.87);
+  outline: none;
+  flex: 1;
+  border: none;
+  /* border: 2px solid black; */
+  height: fit-content;
+  font-size: 20px;
+  width: 500px;
+  /* border:1px solid rgb(205, 205, 205); */
+  /* border-radius: 6px; */
+  
+}
+
+.form .input-container .input.h-full {
+  height: 50px;
+  margin-left: 1px;
+  margin-right: 8px;
+}
+
+.form .input-container .input.h-min {
+  height: 45px;
+  margin-left: 1px;
+  margin-right: 8px;
+}
+
+.form .input-container.def {
+  border-radius: 4px;
+}
+
+.form .input-container .input::placeholder {
+  text-transform: capitalize;
+}
+
+.container-searchList {
+  /* background-color: rgb(255, 0, 0); */
+  /* width: 650px; */
+  overflow-y: scroll;
+  height: 300px;
+  margin-top: 10px;
+
+  max-width: 100%;
+  border-radius: 4px;
+  padding: 0px;
+  background-color: white;
+}
+
+#modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+#modal::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+/* Handle */
+#modal::-webkit-scrollbar-thumb {
+  background: #3e4042b6;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#modal::-webkit-scrollbar-thumb:hover {
+  background: rgba(62, 69, 69, 0.775);
+}
+
+.content-image-searchList {
+  height: 44px;
+  height: 54px;
+  border-radius: 10px;
+  object-fit: contain;
+ 
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  
+}
+
+.content-searchList:hover {
+  background-color: #eee;
+}
+
+.content-searchList:nth-child(1) {
+  margin-top: 0px;
+}
+
+.content-searchList {
+  margin-top: 10px;
+  display: flex;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.mleft {
+  margin-left: 8px;
+  color: #202124;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #777;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 15px;
+  opacity: 0.6;
+  height: 30px;
+  width: 30px;
+}
+
+@media (max-width: 375px) {
+  .input.h-full {
+    margin-right: 0px !important;
+  }
+}
   
 }
 

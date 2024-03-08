@@ -9,6 +9,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import NavDataComponent from "./components/NavDataComponent";
 config.autoAddCss = false;
 import NextTopLoader from 'nextjs-toploader';
+import Scroll from "./Scroll";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +23,13 @@ export default function RootLayout({ children }) {
     <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID}>
       
     <html lang="en">
+    <Scroll />
+
       <Head>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </Head>
-      <body className={inter.className} >
-        <div className="overflow-hidden">
+      <body id="modal" className={inter.className} >
+        <div  className="">
 
       <NextTopLoader
       color="#F62B00"

@@ -4,7 +4,7 @@ import { patchFetch } from "next/dist/server/app-render/entry-base";
 import ProductShow from "./ProductShow";
 
 const DataComponent =async (outlet) => {
- 
+  console.log("outlet in Client Side is:::::::::::::::::::::::::::::::::::::::::", (outlet['outlet'])['url']);
     const fetchData = async () => {
         try {
           console.log("Fetch Data Function Running ..........................");
@@ -28,7 +28,6 @@ const DataComponent =async (outlet) => {
         }
       };
       const fetchSimilarProducts=async (params)=>{
-        
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getSimilarProducts`, {
           method: 'POST',
           headers: {
@@ -53,6 +52,7 @@ const DataComponent =async (outlet) => {
             }); 
             let result = await newPromise; 
       let outData=await fetchData();
+      console.log("OutData is ::::::::::::::::::::::::::::::::::::::::::",outData);
       
       let fetchSimilar=await fetchSimilarProducts(outData);
       

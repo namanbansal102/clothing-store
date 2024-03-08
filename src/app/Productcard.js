@@ -21,7 +21,7 @@ const Product = (props) => {
         <div className="lower-card-portion">
             <h1 className='text-gray-400'>{title.split(" ")[0]}</h1>
             <h1 className='text-black'>{title}</h1>
-            <h1>RS.{price}</h1>
+            <h1>₹ {price}</h1>
         </div>
         <ToastContainer />
     </div>
