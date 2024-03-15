@@ -4,18 +4,18 @@ import React, { useState } from "react";
 import SearchChildList from "./SearchChildList";
 let data=0
 async function getData() {
-  console.log("Get Data function is Running");
+  // console.log("Get Data function is Running");
   fetch("http://localhost:3000/api/getAllSearchData") //1
   .then((response) => response.json()) //2
   .then((user) => {
-    console.log(user); //3
+    // console.log(user); //3
     data=user
   });
 }
 getData();
 export default   function SearchList ({ input,popup }) {
 
-  console.log("Data in it is:::::",popup);
+  // console.log("Data in it is:::::",popup);
   const [renderData, setRenderData] = useState(data.search);
   const removeItem = (id) => {
     const newItem = renderData.filter((data2) => data2.id !== id);

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
 import Product from '@/app/Productcard';
+import { usePathname } from 'next/navigation';
 
 const ProductShow = (outlet) => {
   function useHorizontalScroll() {
@@ -58,10 +59,11 @@ const ProductShow = (outlet) => {
         
       };
     console.log("Prop is::::",prop);
+    const path=usePathname()
   return (
     <>
      
-        <div>
+        <div className='overflow-x-hidden'>
         
           <div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around">
 
@@ -86,14 +88,17 @@ const ProductShow = (outlet) => {
                 </div>
                 <PinCode></PinCode>
                 <button disabled={disabled} onClick={handleClick} className=' bg-black h-20 w-full text-white disabled:bg-gray-700' >{show}</button>
+                <Link href={`${path}/customization`}>
+                <button   className=' my-8 text-black shadow-md h-10 rounded-lg w-full bg-white disabled:bg-gray-700 hover:bg-black hover:text-white' >CUSTOMIZE</button>
+                </Link>
                 <div className="mydetails">
                   <details >
                     <summary>Product Details and Overview</summary>
-                    <p >{prop.desc}</p>
+                    <p >Imports From USA California</p>
                   </details>
                   <details>
                     <summary>Delivery, Return & Exchange Policy</summary>
-                    <p>Kick your style quotient up a notch with the Nuon t-shirt. Black canvas boasting a round neckline, short sleeves, and a contrast print infused with elegant embroidery details, this t-shirt effortlessly blends comfort and trendiness. Pair it with high-waisted jeans and sneakers for an effortlessly chic look.</p>
+                    <p>Kick style quotient up a notch with the {prop.category} </p>
                   </details>
                 </div>
               </div>

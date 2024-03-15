@@ -5,7 +5,6 @@ import Product from '@/app/Productcard'
 import FilterBar from '@/app/FilterBar'
 import DataComponent from './[product-name]/components/DataComponent'
 const page = async () => {
-  
   let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProducts`)
   let newPromise =  
   new Promise(function (resolve, reject) { 
@@ -18,17 +17,10 @@ let result = await newPromise;
     return (
       <>
       <div>
-       
-
         <FilterBar outlet={json['products']}>
-        </FilterBar>
-        
-        
-     
-        
+        </FilterBar> 
         </div>
         </>
   )
 }
-
 export default page
