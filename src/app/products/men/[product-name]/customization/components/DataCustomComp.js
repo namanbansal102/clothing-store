@@ -1,9 +1,13 @@
 'use server'
+import { patchFetch } from "next/dist/server/app-render/entry-base";
+import ClientCompCustom from "./ClientCompCustom";
+// import ProductShow from "./ProductShow";
 
-import ProductShow from "./ProductShow";
-
-const DataComponent =async (outlet) => {
-  console.log("query in Data Component is:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"+outlet);
+const DataCustomComp =async ({outlet}) => {
+  //  let  path=compN
+  let path=outlet.compN
+   console.log("Path is::::::::::::",outlet.compN);
+  console.log(path);
     const fetchData = async () => {
         try {
           console.log("Fetch Data Function Running ..........................");
@@ -12,7 +16,7 @@ const DataComponent =async (outlet) => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ slug: (outlet['outlet'])['url'] }),
+            body: JSON.stringify({ slug: path}),
           });
           const newData = await response.json();
   
@@ -26,19 +30,24 @@ const DataComponent =async (outlet) => {
           console.error("Error fetching data:", error);
         }
       };
+    
       let newPromise =  
                 new Promise(function (resolve, reject) { 
                 setTimeout(function () { 
                     resolve("Hello Geeks. Wrapped  setTimeout() in a promise"); 
-                }, 3000); 
-            }); 
-            let result = await newPromise; 
-      let outData=await fetchData();
+                }, 100); 
+            });
+            let outData=await fetchData(); 
+           
+      console.log("OutData is ::::::::::::::::::::::::::::::::::::::::::",outData);
+      
+     
+      
   return (
     <>
-    <ProductShow outlet={outData}></ProductShow>
+    <div><ClientCompCustom outlet={outData}></ClientCompCustom></div>
     </>
   )
 }
 
-export default DataComponent
+export default DataCustomComp

@@ -43,7 +43,7 @@ const Navbar =(outlet) => {
   const router = useRouter();
   const pathname = usePathname()
 
-  console.log("My Router PathName is my Router PathName is:::::",pathname);
+  // console.log("My Router PathName is my Router PathName is:::::",pathname);
   let prop=(outlet['outlet'])
   let getState="Login"
   if (prop['success']) {
@@ -75,7 +75,7 @@ const [input, setInput] = useState("");
         
       
 <div className='' hidden={typeDis} on onClick={()=>{
-  console.log("OnClick Function is Running");
+  // console.log("OnClick Function is Running");
   settypeDis(true)
  }}>
   
@@ -98,7 +98,7 @@ const [input, setInput] = useState("");
       
       </div>
       <div hidden={!typeDis} onMouseLeave={()=>{
-        console.log("leaving My Mouse");
+        // console.log("leaving My Mouse");
         setTimeout(() => {
           
           setShowPopup(false)

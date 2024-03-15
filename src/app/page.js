@@ -2,14 +2,17 @@
 // import Image from "next/image";
 import Script from "next/script";
 // import { Crisp } from "crisp-sdk-web";
-// import Crisp from "crisp-react";
+import Crisp from "crisp-react";
 
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel'
+import { useEffect } from "react";
 
 export default function Home( ) {
-  
+  useEffect(() => {
+    Crisp.configure("a51dc7c3-9789-4335-8fad-43da356a5d4b");
+  }, []);
   <Script src="https://kit.fontawesome.com/70972682bd.js" strategy="lazyOnload"/>
   // googleLogout();
  
