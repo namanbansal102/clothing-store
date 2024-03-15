@@ -1,5 +1,8 @@
 import connectDb from "../../../../middleware/mongoose"
 import Products from "../../../../models/Products"
+import ProductsBeauty from "../../../../models/ProductsBeauty";
+import ProductsBrand from "../../../../models/ProductsBrand";
+import ProductsKids from "../../../../models/ProductsKids";
 import ProductsWomen from "../../../../models/ProductsWomen";
 export async function POST(req,res){
     try{
@@ -17,11 +20,14 @@ export async function POST(req,res){
         else if (type=='women') {
             query = ProductsWomen.find({ 'category':data});
         }
+        else if (type=='kids') {
+            query = ProductsKids.find({ 'category':data});
+        }
         else if (type=='beauty') {
-            query = ProductsWomen.find({ 'category':data});
+            query = ProductsBeauty.find({ 'category':data});
         }
         else if (type=='brand') {
-            query = ProductsWomen.find({ 'category':data});
+            query = ProductsBrand.find({ 'category':data});
         }
         query.select('title slug img category size color price quantity');
         let myproduct = await query.exec();

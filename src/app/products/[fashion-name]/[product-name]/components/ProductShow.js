@@ -51,7 +51,7 @@ const ProductShow = (outlet) => {
       const id=prop._id
       
       
-      document.cookie = `${".westside." + id.substring(0, 10) +"_"+type+"_1"}=${JSON.stringify(id)}`;
+      document.cookie = `${".westside." + id.substring(0, 10) +"_"+type+"_1"}=${JSON.stringify(id)};path=/`;
       toast('Item Added To Cart');
       setShow("ALREADY IN BAG")
       setDisabled(true);

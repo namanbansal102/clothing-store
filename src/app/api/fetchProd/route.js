@@ -2,6 +2,8 @@ import { faL } from "@fortawesome/free-solid-svg-icons";
 import connectDb from "../../../../middleware/mongoose"
 import Products from "../../../../models/Products"
 import ProductsWomen from "../../../../models/ProductsWomen";
+import ProductsKids from "../../../../models/ProductsKids";
+import ProductsBrand from "../../../../models/ProductsBrand";
 
 export async function POST(req,res){
     try{
@@ -20,10 +22,13 @@ export async function POST(req,res){
             query = ProductsWomen.findOne({ 'slug': myquery });
         }
         else if (type=='kids') {
-            query = Products.findOne({ 'slug': myquery });
+            query = ProductsKids.findOne({ 'slug': myquery });
         }
         else if (type=='beauty') {
-            query = Products.findOne({ 'slug': myquery });
+            query = ProductsBeauty.findOne({ 'slug': myquery });
+        }
+        else if (type=='brand') {
+            query = ProductsBrand.findOne({ 'slug': myquery });
         }
             // selecting the `name` and `occupation` fields
             query.select('title slug desc img category size color price quantity');

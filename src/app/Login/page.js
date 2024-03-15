@@ -34,7 +34,7 @@ const page = () => {
     }).then((a)=>a.json()).then((json)=>{
       if (json.success==true && json.token!=null) {
         toast("Login Successfully!");
-        document.cookie=`token=${JSON.stringify(json['token'])}`;
+        document.cookie=`token=${JSON.stringify(json['token'])} path=/`;
         console.log("Login Successfully");
         router.push(`/`)
         router.refresh()
@@ -75,7 +75,7 @@ const page = () => {
                 <GoogleLogin 
   onSuccess={credentialResponse => {
     console.log(credentialResponse);
-    document.cookie=`token="${credentialResponse['credential']}"`
+    document.cookie=`token="${credentialResponse['credential']}";path=/`
     router.push('/')
     router.refresh()
   }}
