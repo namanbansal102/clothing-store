@@ -20,14 +20,18 @@ const MyCart = (props) => {
 
   let {a,b,c}=props['outlet']
   let outlet=a
-  console.log("a value is::",c);
+  console.log("a value is::::::::::::::::",props['outlet']);
   
   // console.log("myOutlet in my Cart Page is:",outlet);
   const handleDelete=()=>{
-    console.log("Handle Delete is Running");
-    let a=".westside."+(outlet['_id']).substring(0,10)
-    console.log(a);
-    localStorage.removeItem(a)
+    var myCookies = getCookies();
+    Object.keys(myCookies).forEach(key => {
+      console.log(key);
+      if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
+        console.log("Equal Equal Hoorahy");
+        delete_cookie(key);
+      }
+  });
     window.location.reload();
   }
   useEffect(() => {
@@ -51,35 +55,38 @@ const MyCart = (props) => {
                 <div className="quantity flex gap-5">
                     
                     <button className='rounded-full border-2 border-gray-100 px-2 ' onClick={()=>{
-                      if (val!=0) {
+                      if (val!=1) {
+                        c(b-outlet['price'])
+                        setval(val-1)
                         var myCookies = getCookies();
                         console.log("Running Plus and Setting my Cookies are:",myCookies);
                         Object.keys(myCookies).forEach(key => {
+                          console.log(key);
                           if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
                             console.log("Equal Equal Hoorahy");
                             delete_cookie(key);
-                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10) +"_"+ (val-1)}=${JSON.stringify(outlet['_id'])}`;
+                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10)+"_"+outlet['size'].split("_")[0]+"_"+ (val-1)}=${JSON.stringify(outlet['_id'])}`;
                           }
                           console.log(`${key}: ${myCookies[key]}`);
                       });
-                        setval(val-1)
-
+                        
                       }
-                      }}>-</button>
+                    }}>-</button>
                     <h1>{val}</h1>
                     <button className='rounded-full border-2 border-gray-100 px-2 ' onClick={()=>{
                       if (val!=outlet['quantity']) {
+                        c(b+outlet['price'])
+                        setval(val+1)
                         var myCookies = getCookies();
                         console.log("Running Plus and Setting my Cookies are:",myCookies);
                         Object.keys(myCookies).forEach(key => {
                           if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
                             console.log("Equal Equal Hoorahy");
                             delete_cookie(key);
-                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10) +"_"+ (val+1)}=${JSON.stringify(outlet['_id'])}`;
+                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10)+"_"+outlet['size'].split("_")[0]+"_"+ (val+1)}=${JSON.stringify(outlet['_id'])}`;
                           }
                           console.log(`${key}: ${myCookies[key]}`);
                       });
-                      setval(val+1)
                       // myCookies[`${".westside." + outlet['_id'].substring(0, 10) + "_1"}`]
                     }
                       }}>+</button>
