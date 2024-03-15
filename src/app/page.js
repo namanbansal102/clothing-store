@@ -1,8 +1,8 @@
 'use client'
 // import Image from "next/image";
 import Script from "next/script";
-// import { Crisp } from "crisp-sdk-web";
-import Crisp from "crisp-react";
+import { Crisp } from "crisp-sdk-web";
+// import Crisp from "crisp-react";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";

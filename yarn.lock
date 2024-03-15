@@ -959,6 +959,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+crisp-sdk-web@^1.0.22:
+  version "1.0.22"
+  resolved "https://registry.yarnpkg.com/crisp-sdk-web/-/crisp-sdk-web-1.0.22.tgz#4111f21195b8c613cb896a8fd968bf6337deef64"
+  integrity sha512-5LakqSr638Cv1J/FuM/RhCGVEaHmrbPpEY14h9GdoEUeNF+jzDhV2KwTVVL5hDwTo5Vhc1J+hprUzgqUv9xH4Q==
+
 cross-spawn@^7.0.0:
   version "7.0.3"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz"
