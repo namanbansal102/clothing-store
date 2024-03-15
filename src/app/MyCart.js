@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react'
 
 const MyCart = (props) => {
   var delete_cookie = function(name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
 };
   var getCookies = function(){
     var pairs = document.cookie.split(";");
@@ -65,7 +65,7 @@ const MyCart = (props) => {
                           if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
                             console.log("Equal Equal Hoorahy");
                             delete_cookie(key);
-                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10)+"_"+outlet['size'].split("_")[0]+"_"+ (val-1)}=${JSON.stringify(outlet['_id'])}`;
+                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10)+"_"+outlet['size'].split("_")[0]+"_"+ (val-1)}=${JSON.stringify(outlet['_id'])};path=/`;
                           }
                           console.log(`${key}: ${myCookies[key]}`);
                       });
@@ -83,7 +83,7 @@ const MyCart = (props) => {
                           if (key.substring(10,20)==outlet['_id'].substring(0, 10)) {
                             console.log("Equal Equal Hoorahy");
                             delete_cookie(key);
-                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10)+"_"+outlet['size'].split("_")[0]+"_"+ (val+1)}=${JSON.stringify(outlet['_id'])}`;
+                            document.cookie = `${".westside." + outlet['_id'].substring(0, 10)+"_"+outlet['size'].split("_")[0]+"_"+ (val+1)}=${JSON.stringify(outlet['_id'])};path=/`;
                           }
                           console.log(`${key}: ${myCookies[key]}`);
                       });
