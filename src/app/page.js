@@ -1,15 +1,10 @@
 'use client'
 // import Image from "next/image";
 import Script from "next/script";
-import { Crisp } from "crisp-sdk-web";
+// import { Crisp } from "crisp-sdk-web";
 // import Crisp from "crisp-react";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBagShopping, faCartShopping, faCheck, faHeart, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
-// import Link from "next/link";
-// import Navbar from "./Navbar";
-// import Footer from "./Footer";import { GoogleLogin,useGoogleOneTapLogin,googleLogout } from '@react-oauth/google';
-// import MyGoogle from "./MyGoogle";
+
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 
@@ -50,7 +45,7 @@ export default function Home( ) {
    <div className="fourth-image">
     <img src="https://www.westside.com/cdn/shop/files/WS_Web_Hero_Banner_04_2945ec97-3eb4-4ddd-a080-a58c64aac7d1.jpg?v=1697194912" alt=""  />
    </div>
-<Crisp crispWebsiteId={process.env.NEXT_PUBLIC_CRISP_ID} />
+{/* <Crisp crispWebsiteId={process.env.NEXT_PUBLIC_CRISP_ID} /> */}
    </>
   );
 }
