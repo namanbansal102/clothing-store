@@ -13,12 +13,12 @@ const DataComponent =async (outlet) => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ slug: (outlet['outlet'])['url'] }),
+            body: JSON.stringify({ slug: ((outlet['outlet'])['url']) }),
           });
           const newData = await response.json();
   
           if (newData.status === true && newData.myproduct != null) {
-            const productData = newData.myproduct;
+            const productData = {product:newData.myproduct,slug:((outlet['outlet'])['url'])};
             return productData;  
           } else {
             console.log("Json Not Found");
@@ -28,6 +28,7 @@ const DataComponent =async (outlet) => {
         }
       };
       const fetchSimilarProducts=async (params)=>{
+        
         const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getSimilarProducts`, {
           method: 'POST',
           headers: {
