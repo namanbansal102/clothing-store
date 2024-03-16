@@ -27,7 +27,7 @@ const ClientCom = (outlet) => {
             return <> 
             <div className='card rounded-xl shadow-2xl py-5 '>
             <div className='inner-card flex justify-center items-center flex-col gap-4'>
-            <Link className='flex justify-center items-center flex-col gap-4' href={`/products/men/${(value['title'].split(" ")).join("-")}`}>
+            <Link className='flex justify-center items-center flex-col gap-4' href={`/products/${value['size'].split("_")[0]}/${(value['title'].split(" ")).join("-")}`}>
             <img  className='h-20 rounded-xl ' src={value.img}  />
             <h1 className='text-center'>{value.title}</h1>
             </Link>

@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { GoogleLogin,useGoogleOneTapLogin } from '@react-oauth/google';
 
+import { GoogleLogin,useGoogleOneTapLogin } from '@react-oauth/google';
+import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation'
 const page = () => {
   const router= useRouter()
@@ -21,7 +21,8 @@ const page = () => {
             setpassword(e.target.value)
         }
     }
-    const handleClick=()=>{
+    const handleClick=(e)=>{
+      e.preventDefault();
         console.log("Handle Click is Running");
         console.log(email);
         console.log(password);
@@ -33,7 +34,7 @@ const page = () => {
       body: JSON.stringify({email,password}),
     }).then((a)=>a.json()).then((json)=>{
       if (json.success==true && json.token!=null) {
-        toast("Login Successfully!");
+        toast("Login Success");
         document.cookie=`token=${JSON.stringify(json['token'])} path=/`;
         console.log("Login Successfully");
         router.push(`/`)
@@ -58,14 +59,42 @@ const page = () => {
         </div>
         <div className="lower-portion my-5">
             <div className="buttons"></div>
+            <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+    
+    // Default options for specific types
+    success: {
+      duration: 3000,
+      theme: {
+        primary: 'green',
+        secondary: 'black',
+      },
+    },
+  }}
+/>
             <div className="lower-right-portion">
                 <h1 className='text-3xl my-3'>Login</h1>
                 <h1 className='text-xl my-2 '>Enter Email</h1>
-                <input name='email' onChange={handleChange}  className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Enter Email Address' />
+                <form  onSubmit={handleClick} className=''>
+
+                <input size={30}  maxLength={30} minLength={15}  name='email' onChange={handleChange}  className='shadow-sm border-2 h-16 border-gray-300 rounded-lg ' type="text" placeholder='Enter Email Address' />
                 <h1 className='text-xl my-2 '>Enter password</h1>
-                <input name='password'  onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Password Please' />
+                <input  size={30}  maxLength={15} minLength={5} name='password' type='password'  onChange={handleChange} className='shadow-sm border-2 h-16 border-gray-300 rounded-lg '  placeholder='Password Please' />
                 <br />
-                <button onClick={handleClick} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl'>Login</button>
+                <button  type='submit' className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl'>LOG IN</button>
+                </form>
                 <h1 className='text-center'><Link href={'/SignUp'}><u>Do Not Have Account</u>
                 </Link>
                 </h1>
@@ -86,7 +115,7 @@ const page = () => {
   </div>
             </div>
         </div>
-        <ToastContainer />
+        
     </div>
   )
 }

@@ -4,8 +4,8 @@ import OtpInput from 'react-otp-input';
 import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 import ReCAPTCHA from "react-google-recaptcha";
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation'
@@ -155,14 +155,39 @@ const page = () => {
                 <h1 className='text-xl my-2 '>Enter Email</h1>
                 <input name='email' onChange={handleChange} typeof='email' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Enter Email Address' />
                 <h1 className='text-xl my-2 '>Enter password</h1>
-                <input name='password' onChange={handleChange} typeof='password' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Password Please' />
-                <br />
+                <input name='password' onChange={handleChange} type='password' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' placeholder='Password Please' />
+                <br />  
                 <div className='my-4'>
                 <ReCAPTCHA
     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_KEY}
     onChange={onChange}
     />
     </div>
+    <Toaster
+  position="top-center"
+  reverseOrder={false}
+  gutter={8}
+  containerClassName=""
+  containerStyle={{}}
+  toastOptions={{
+    // Define default options
+    className: '',
+    duration: 5000,
+    style: {
+      background: '#363636',
+      color: '#fff',
+    },
+    
+    // Default options for specific types
+    success: {
+      duration: 3000,
+      theme: {
+        primary: 'green',
+        secondary: 'black',
+      },
+    },
+  }}
+/>
                 <button disabled={disabled} onClick={handleClick} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl disabled:bg-slate-700 disabled:cursor-not-allowed disabled:text-white'>Sign Up</button>
                 <h1 className='text-center'><Link href={'/Login'}><u>Want's to Login</u>
                 </Link>
@@ -188,7 +213,7 @@ const page = () => {
             </div>
         </div>
      
-        <ToastContainer />
+       
         </div>}
     {!otpState && <div>
       

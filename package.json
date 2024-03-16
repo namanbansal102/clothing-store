@@ -20,6 +20,7 @@
     "crisp-sdk-web": "^1.0.22",
     "crypto-js": "^4.2.0",
     "fortawesome": "^0.0.1-security",
+    "google-maps-react": "^2.0.6",
     "jose": "^5.2.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",

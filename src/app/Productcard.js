@@ -13,7 +13,7 @@ const Product = (props) => {
     
     <div className="div-card   w-72 my-4 mx-9 cursor-pointer shadow-xl hover:scale-105 transition-all duration-500">
     <FaRegHeart   onClick={()=>{
-      localStorage.setItem(`myWestSide_${title}`,JSON.stringify({title,slug,desc,img}))
+      localStorage.setItem(`myWestSide_${title}`,JSON.stringify({title,slug,desc,img,size}))
       toast("Item Added To WishList");
     }} className='text-2xl my-1 float-right mr-2 cursor-pointer absolute ' />
         <img className='h-96' src={img} alt="" srcset="" />
