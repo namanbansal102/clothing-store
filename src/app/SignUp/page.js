@@ -141,9 +141,9 @@ const page = () => {
         <div className="upper-portion w-fit flex gap-6 justify-center items-center text-3xl">
             
             <div className="my-det">
-                <h1>Welcome ! Welcome!</h1>
+                <h1>Sign Up To WestSide </h1>
                
-                <u className='text-lg'>View Details</u>
+                {/* <u className='text-lg'>View Details</u> */}
             </div>
         </div>
         <div className="lower-portion my-5">
