@@ -17,6 +17,12 @@ const page = () => {
     const [email, setemail] = useState(null);
     const [password, setpassword] = useState(null);
     const [name, setname] = useState(null);
+    const [oneNumber, setOneNumber] = useState(null);
+    const [twoNumber, settwoNumber] = useState(null);
+    const [threeNumber, setthreeNumber] = useState(null);
+    const [fourNumber, setfourNumber] = useState(null);
+    const [OtpDisabled, setOtpDisabled] = useState(false)
+    const [otpUi,setotpUi]=useState(true)
     const handleChange=(e)=>{
         if (e.target.name==="name") {
             console.log(e.target.value);
@@ -30,11 +36,73 @@ const page = () => {
             console.log(e.target.value);
             setpassword(e.target.value)
         }
+        if (e.target.name==='one') {
+        
+            
+            console.log(e.target.value);
+            setOneNumber(e.target.value)
+            console.log(typeof oneNumber);
+            
+           
+          
+          
+        }
+          if (e.target.name==='two') {
+            
+           
+              
+              console.log(e.target.value);
+            settwoNumber(e.target.value)
+         
+        }
+        if (e.target.name==='three') {
+         
+
+            console.log(e.target.value);
+            setthreeNumber(e.target.value)
+         
+        }
+        if (e.target.name==='four') {
+         
+          
+            console.log(e.target.value);
+            setfourNumber(e.target.value)
+            console.log(fourNumber);
+            console.log("My Number is is is is is is is is si sis is s::",(oneNumber+twoNumber+threeNumber+fourNumber));
+            fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
+              method: 'PUT',
+              headers: {  
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({"clientOtp":Number(oneNumber+twoNumber+threeNumber+e.target.value)}),
+            }).then((a)=>a.json()).then((json)=>{
+              
+              if (json.success==true && json.token!=null) {
+        
+                toast("OTP has been Sent Successfully");
+                document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
+                console.log("Sign Up Successfully");
+               
+                
+                router.push(`/`)
+                router.refresh()
+            }
+            else{
+                toast("Unable To Login");
+                console.log("Unable To Login");
+              }
+              console.log(json);
+            })
+
+          
+        }
     }
     function onChange(value) {
       console.log("Captcha value:", value);
       setdisabled(false)
+
     }
+
     
     const handleClick=()=>{
         console.log("Handle Click is Running");
@@ -48,13 +116,15 @@ const page = () => {
       body: JSON.stringify({name,email,password}),
     }).then((a)=>a.json()).then((json)=>{
       
-      if (json.success==true && json.token!=null) {
+      if (json.success==true) {
 
-        toast("Sign Up Successfully!");
-        document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
-        console.log("Sign Up Successfully");
-        router.push(`/`)
-        router.refresh()
+        toast("OTP has been Sent Successfully");
+        // document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
+        // console.log("Sign Up Successfully");
+        setotpState(false)
+        
+        // router.push(`/`)
+        // router.refresh()
     }
     else{
         toast("Unable To Login");
@@ -122,21 +192,20 @@ const page = () => {
         </div>}
     {!otpState && <div>
       
+      <div className="mybox flex flex-col  items-center justify-center my-28">
 
-
-      <div class="prompt">
-	Enter the code generated on your mobile device below to log in!
+      <h1 className='text-3xl'>Enter Otp To Confirm Your Account</h1>
+      <div class="prompt flex items-center justify-center my-10 gap-7">
+      <input name='one'  onChange={handleChange}  value={oneNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
+      <input name='two'  readOnly={OtpDisabled}onChange={handleChange} value={twoNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
+      <input name='three' readOnly={OtpDisabled} onChange={handleChange} value={threeNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
+      <input name='four' readOnly={OtpDisabled} onChange={handleChange}  value={fourNumber} className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
+     
+      
+      </div>
 </div>
 
-<form method="get" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
-	<input type="text" id="digit-1" name="digit-1" data-next="digit-2" />
-	<input type="text" id="digit-2" name="digit-2" data-next="digit-3" data-previous="digit-1" />
-	<input type="text" id="digit-3" name="digit-3" data-next="digit-4" data-previous="digit-2" />
-	<span class="splitter">&ndash;</span>
-	<input type="text" id="digit-4" name="digit-4" data-next="digit-5" data-previous="digit-3" />
-	<input type="text" id="digit-5" name="digit-5" data-next="digit-6" data-previous="digit-4" />
-	<input type="text" id="digit-6" name="digit-6" data-previous="digit-5" />
-</form>
+
       </div>}
   </>
   )
