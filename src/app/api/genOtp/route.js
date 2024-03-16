@@ -8,7 +8,7 @@ var transporter = nodemailer.createTransport({
   }); 
 export async function POST(req,res) {
     try {
-      console.log(req);
+      // console.log(req);
         let make=req
     let randomOtp = Math.floor((Math.random() * 10000) + 9);
   var mailOptions = {
