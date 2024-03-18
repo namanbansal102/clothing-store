@@ -57,7 +57,40 @@ const ProductShow = (outlet) => {
       setDisabled(true);
         
       };
+      const [XS, setXS] = useState(false);
+      const [S, setS] = useState(false);
+      const [M, setM] = useState(true);
+      const [L, setL] = useState(false);
+      const [XL, setXL] = useState(false);
     console.log("Prop is::::",prop);
+    const handleSize=(e)=>{
+      const name=e.target.name;
+      setXS(false);
+      setS(false);
+      setM(false);
+      setL(false);
+      setXL(false);
+      if (name==='XS') {
+        setXS(true)
+      }
+      if (name==='S') {
+        
+        setS(true)
+      }
+      if (name==='M') {
+        setM(true)
+        
+      }
+      if (name==='L') {
+        setL(true)
+        
+      }
+      if (name==='XL') {
+        setXL(true)
+        
+      }
+      toast.success(name+" Size Available")
+    }
     const path=usePathname()
   return (
     <>
@@ -79,11 +112,11 @@ const ProductShow = (outlet) => {
                 <div className='border-t-2 border-gray-400 w-full h-0'></div>
                 <h1>SIZE</h1>
                 <div className="my-buttons text-lg flex flex-row gap-2 mx-3 my-3">
-                  <button className='border-2 border-black w-10 h-10  hover:bg-black hover:text-white'>XS</button>
-                  <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>S</button>
-                  <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>M</button>
-                  <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>L</button>
-                  <button className='border-2 border-black  w-10 h-10 hover:bg-black hover:text-white'>XL</button>
+                  <button onClick={handleSize} name='XS' className={`border-2 bg-${XS?'black':'white'} text-${XS?'white':'black'} border-black  w-10 h-10 hover:bg-black hover:text-white`}>XS</button>
+                  <button name='S' onClick={handleSize} className={`border-2 bg-${S?'black':'white'} text-${S?'white':'black'} border-black  w-10 h-10 hover:bg-black hover:text-white`}>S</button>
+                  <button onClick={handleSize} name='M' className={`border-2 bg-${M?'black':'white'} text-${M?'white':'black'} border-black  w-10 h-10 hover:bg-black hover:text-white`}>M</button>
+                  <button onClick={handleSize} name='L' className={`border-2 bg-${L?'black':'white'} text-${L?'white':'black'} border-black  w-10 h-10 hover:bg-black hover:text-white`}>L</button>
+                  <button onClick={handleSize} name='XL' className={`border-2 bg-${XL?'black':'white'} text-${XL?'white':'black'} border-black  w-10 h-10 hover:bg-black hover:text-white`}>XL</button>
                 </div>
                 <PinCode></PinCode>
                 <button disabled={disabled} onClick={handleClick} className=' bg-black h-20 w-full text-white disabled:bg-gray-700' >{show}</button>

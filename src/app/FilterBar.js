@@ -60,14 +60,7 @@ let result = await newPromise;
         <input value={change} onChange={handleChange} className='w-96 appearance-none bg-black myrange' type="range" />
     </div>
     <h1 className='text-gray-300 underline cursor-pointer hover:text-black'>Filter</h1>
-    <div className="1st-div flex gap-2">
-    <input type="checkbox" />
-    <h1 className='text-gray-300 cursor-pointer hover:text-black'>H-L</h1>
-    </div>
-    <div className="2nd-div flex gap-2">
-    <input onChange={handleLower} value={boxClick} type="checkbox" />
-    <h1 className='text-gray-300 cursor-pointer hover:text-black'>L-H</h1>
-    </div>
+    
     {/* <Sidebar /> */}
     
     </div>
