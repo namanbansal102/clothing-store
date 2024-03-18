@@ -13,6 +13,8 @@ export async function POST(req, res) {
     console.log("FName is::::",FName);
     console.log(mydata);
     // Initialize razorpay object
+    // then add it's id
+    
     const razorpay = new Razorpay({
       key_id: process.env.KEY_ID,
       key_secret: process.env.KEY_SECRET,
