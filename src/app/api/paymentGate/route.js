@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 import connectDb from "../../../../middleware/mongoose"
 import Orders from "../../../../models/Orders"
 const Razorpay = require("razorpay");
