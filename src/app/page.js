@@ -42,6 +42,7 @@ export default function Home( ) {
    <div className="second-image mt-[90vh]">
     <img src="https://www.westside.com/cdn/shop/files/MAN_2_D.jpg?v=1706260775" alt=""  />
    </div>
+   
    <div className="third-image">
     <img src="https://www.westside.com/cdn/shop/files/ETHNIC_3a1c9203-ec58-4889-b244-864ecc7d72c7.jpg?v=1706260597" alt=""  />
    </div>
