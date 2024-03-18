@@ -4,7 +4,7 @@ import Script from "next/script";
 import { Crisp } from "crisp-sdk-web";
 // import Crisp from "crisp-react";
 
-
+import CookieConsent from "react-cookie-consent";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel'
 import { useEffect } from "react";
@@ -47,6 +47,26 @@ export default function Home( ) {
    </div>
    <div className="fourth-image">
     <img src="https://www.westside.com/cdn/shop/files/WS_Web_Hero_Banner_04_2945ec97-3eb4-4ddd-a080-a58c64aac7d1.jpg?v=1697194912" alt=""  />
+    <CookieConsent
+  location="bottom"
+  buttonText="OK"
+  cookieName="myAwesomeCookieName2"
+  style={{ background: "#EFEFEF",
+  opacity:0.6,
+  color:'black',
+  width:'30vw',
+  marginLeft:'67vw',
+  marginBottom:'10vh',
+  
+  
+}}
+  buttonStyle={{ color: "white", fontSize: "13px"
+,backgroundColor:'black' }}
+  expires={150}
+>
+  This website uses cookies to enhance the user experience
+  
+</CookieConsent>
    </div>
 {/* <Crisp crispWebsiteId={process.env.NEXT_PUBLIC_CRISP_ID} /> */}
    </>
