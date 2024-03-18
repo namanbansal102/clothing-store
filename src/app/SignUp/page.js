@@ -4,11 +4,11 @@ import OtpInput from 'react-otp-input';
 import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link'
 import React, { useState } from 'react'
-import 'react-toastify/dist/ReactToastify.css';
-import toast, { Toaster } from 'react-hot-toast';
+
 import ReCAPTCHA from "react-google-recaptcha";
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation'
+import toast from 'react-hot-toast';
 const page = () => {
   const router= useRouter()
   const [otp, setOtp] = useState('');
@@ -79,7 +79,7 @@ const page = () => {
               
               if (json.success==true && json.token!=null) {
         
-                toast("OTP has been Sent Successfully");
+                toast.success("Sign Up Successfully");
                 document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
                 console.log("Sign Up Successfully");
                
@@ -88,7 +88,7 @@ const page = () => {
                 router.refresh()
             }
             else{
-                toast("Unable To Login");
+                toast.error("Error To Login");
                 console.log("Unable To Login");
               }
               console.log(json);
@@ -118,7 +118,7 @@ const page = () => {
       
       if (json.success==true) {
 
-        toast("OTP has been Sent Successfully");
+        toast.success("OTP has been Sent Successfully");
         // document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
         // console.log("Sign Up Successfully");
         setotpState(false)
@@ -127,7 +127,7 @@ const page = () => {
         // router.refresh()
     }
     else{
-        toast("Unable To Login");
+        toast.error("Unable To Login");
         console.log("Unable To Login");
       }
       console.log(json);
@@ -163,31 +163,7 @@ const page = () => {
     onChange={onChange}
     />
     </div>
-    <Toaster
-  position="top-center"
-  reverseOrder={false}
-  gutter={8}
-  containerClassName=""
-  containerStyle={{}}
-  toastOptions={{
-    // Define default options
-    className: '',
-    duration: 5000,
-    style: {
-      background: '#363636',
-      color: '#fff',
-    },
     
-    // Default options for specific types
-    success: {
-      duration: 3000,
-      theme: {
-        primary: 'green',
-        secondary: 'black',
-      },
-    },
-  }}
-/>
                 <button disabled={disabled} onClick={handleClick} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl disabled:bg-slate-700 disabled:cursor-not-allowed disabled:text-white'>Sign Up</button>
                 <h1 className='text-center'><Link href={'/Login'}><u>Want's to Login</u>
                 </Link>

@@ -3,7 +3,7 @@ var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'namanbansal102@gmail.com',
-      pass: 'wzxv qfku errq lzwm'
+      // pass: 'wzxv qfku errq lzwm'
     }
   }); 
 export async function POST(req,res) {

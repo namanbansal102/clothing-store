@@ -34,14 +34,14 @@ const page = () => {
       body: JSON.stringify({email,password}),
     }).then((a)=>a.json()).then((json)=>{
       if (json.success==true && json.token!=null) {
-        toast("Login Success");
+        toast.success("Login Success");
         document.cookie=`token=${JSON.stringify(json['token'])} path=/`;
         console.log("Login Successfully");
         router.push(`/`)
         router.refresh()
     }
     else{
-        toast("Invalid password");
+        toast.error("Invalid password");
         console.log("Login Not  Successfully");
       }
       console.log(json);

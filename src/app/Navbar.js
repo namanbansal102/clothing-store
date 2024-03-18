@@ -6,8 +6,7 @@ import 'reactjs-popup/dist/index.css';
 
 import Image from "next/image";
 import Script from "next/script";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faCartShopping, faCheck, faHeart, faL, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ReactSearchBox from "react-search-box";
@@ -163,7 +162,7 @@ const [input, setInput] = useState("");
       <img width="30" height="30" src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="shopping-cart--v1"/>
       </Link>
 <div className='flex flex-col'>
-<ToastContainer />
+
 {/* <Link href={'/Login'}>
 <button className="button bg-black text-white text-md px-3 rounded-md">{getState}</button>
 </Link> */}

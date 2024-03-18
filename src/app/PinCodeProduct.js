@@ -1,7 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast from 'react-hot-toast';
 
 const PinCode = (params) => {
   console.log(params);
@@ -23,11 +22,16 @@ const PinCode = (params) => {
         // let ko=(params['outlet'])['setcity']
         // k(json['state'])
         // ko(json['Block'])
-        toast("Delivery Available!");
+        toast.success("Delivery Available",{
+          toastId: 'success1',
+      })
+        // toast("Delivery Available!");
       }
       else{
         setavalibiltiy(false);
-        toast("Sorry Can't be Delivered!");
+        toast.error("Sorry Can't be Delivered!",{
+          toastId: 'success2',
+      });
       }
       console.log(json);
     })
@@ -42,12 +46,13 @@ const PinCode = (params) => {
 <>
     <div className='my-2 flex gap-3'>
     <input onChange={handleChange}  placeholder='Enter pin Code here' className='border-2 border-gray-400 h-16 rounded-lg px-3'></input>
+    
     <button className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg px-5' onClick={handleClick}>Check</button>
     </div>
     {avalibiltiy && <h1 className='font-bold'>Delivery Within 3-7 Days</h1>}
     {pin && !avalibiltiy && <h1 className=' font-bold'>Sorry Not Reached At This Point</h1>}
     
-<ToastContainer />
+    
 </>
   )
   
