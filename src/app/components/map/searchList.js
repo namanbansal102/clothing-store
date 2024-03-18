@@ -5,7 +5,7 @@ import SearchChildList from "./SearchChildList";
 let data=0
 async function getData() {
   // console.log("Get Data function is Running");
-  fetch("http://localhost:3000/api/getAllSearchData") //1
+  fetch(`${process.env.NEXT_PUBLIC_HOST}api/getAllSearchData`) //1
   .then((response) => response.json()) //2
   .then((user) => {
     // console.log(user); //3

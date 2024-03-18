@@ -43,7 +43,7 @@ const ClientOrder = (outlet) => {
           return;
         }
         // Make API call to the serverless API
-        const data = await fetch("http://localhost:3000/api/paymentGate", { method: "POST",headers: {  
+        const data = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/paymentGate`, { method: "POST",headers: {  
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({FName,LName,address,city,state,pinCode,totalAmount,prodInfo,id:a}) }).then((t) =>
