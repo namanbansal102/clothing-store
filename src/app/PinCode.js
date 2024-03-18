@@ -4,12 +4,12 @@ import toast from 'react-hot-toast';
 
 
 const PinCode = (params) => {
-  console.log(params);
+  
   const [pin, setPin] = useState(null);
   const [avalibiltiy, setavalibiltiy] = useState(false)
   const handleClick=()=>{
     
-    console.log("Handle Click is Running");
+    
     let data=fetch(`${process.env.NEXT_PUBLIC_HOST}api/fetchpin`, {
       method: 'POST',
       headers: {  
@@ -29,7 +29,7 @@ const PinCode = (params) => {
         setavalibiltiy(false);
         toast.error("Sorry Can't be Delivered!");
       }
-      console.log(json);
+      
     })
 
   }

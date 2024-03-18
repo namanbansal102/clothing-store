@@ -34,12 +34,12 @@ const ProductShow = (outlet) => {
     const [product, setProduct] = useState(null);
     let outcome=((outlet.outlet).outData)['product']
     let type=((outlet.outlet).outData)['slug']['fashion-name']
-    console.log("My outcome my outcome my outcome::::::::::::::::::::",type);
+    
     const similar=(outlet.outlet).fetchSimilar
     let prop=outcome
     
 
-    console.log(product);
+    
     const [show, setShow] = useState("ADD TO BAG");
     const [disabled, setDisabled] = useState(false);
     // Here my Cookies is an Object
@@ -47,7 +47,7 @@ const ProductShow = (outlet) => {
     
    
     const handleClick =async  () => {
-      console.log("Handle Click is Running",prop._id);
+      
       const id=prop._id
       
       
@@ -62,7 +62,7 @@ const ProductShow = (outlet) => {
       const [M, setM] = useState(true);
       const [L, setL] = useState(false);
       const [XL, setXL] = useState(false);
-    console.log("Prop is::::",prop);
+   
     const handleSize=(e)=>{
       const name=e.target.name;
       setXS(false);

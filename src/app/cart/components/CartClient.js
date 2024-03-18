@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const CartClient = ( outlet ) => {
   const [total, setTotal] = useState(0);
-  console.log("Outlet Outlet Client k is is is :::::",outlet.outlet.k);
+ 
   const [json, setJson] = useState(outlet.outlet.k);
 
   useEffect(() => {

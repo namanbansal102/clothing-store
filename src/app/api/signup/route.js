@@ -17,13 +17,7 @@ let POST=async(request,response)=>{
   const min = 1000;
   const max = 9999;
   randomOtp = Math.floor(Math.random() * (max - min + 1)) + min;
-    // if (email!=null) {
-    //     let kop={"email":email,"password":password,"name":name,"timejson":timejson,"img":img}
-    //     console.log("Value of kop kop is kop is::::::",kop);
-    //     email=null;
-    //     return kop;
-    // }
-    
+   
     let make=await request.json();
     email=make.email;
     password=make.password;

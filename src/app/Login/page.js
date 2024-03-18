@@ -13,19 +13,18 @@ const page = () => {
     const [password, setpassword] = useState(null);
     const handleChange=(e)=>{
         if (e.target.name==="email") {
-            console.log(e.target.value);
+ 
             setemail(e.target.value)
         }
         if (e.target.name==='password') {
-            console.log(e.target.value);
+ 
             setpassword(e.target.value)
         }
     }
     const handleClick=(e)=>{
       e.preventDefault();
-        console.log("Handle Click is Running");
-        console.log(email);
-        console.log(password);
+       
+    
     fetch(`${process.env.NEXT_PUBLIC_HOST}api/login`, {
       method: 'POST',
       headers: {  
@@ -36,15 +35,15 @@ const page = () => {
       if (json.success==true && json.token!=null) {
         toast.success("Login Success");
         document.cookie=`token=${JSON.stringify(json['token'])} path=/`;
-        console.log("Login Successfully");
+        
         router.push(`/`)
         router.refresh()
     }
     else{
         toast.error("Invalid password");
-        console.log("Login Not  Successfully");
+     
       }
-      console.log(json);
+      
     })
     }
   return (
@@ -103,7 +102,7 @@ const page = () => {
 <div className=' w-16'></div>
                 <GoogleLogin 
   onSuccess={credentialResponse => {
-    console.log(credentialResponse);
+ 
     document.cookie=`token="${credentialResponse['credential']}";path=/`
     router.push('/')
     router.refresh()

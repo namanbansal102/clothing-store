@@ -13,11 +13,10 @@ const ClientOrder = (outlet) => {
   
   const [total, settotal] = useState(0)
   // settotal(meData.total)
-  console.log("Outlet is:::::::::::::::::::::::::::::::::::::",outlet);
-  console.log("My data Of Coupon is:::::::",data);
+  
   const makePayment = async (FName,LName,address,city,state,pinCode,totalAmount,prodInfo) => {
     
-    console.log("Make Payment Function is Running",FName,LName,address,city,state,pinCode,totalAmount);
+    
     const initializeRazorpay = () => {
       return new Promise((resolve) => {
         const script = document.createElement("script");
@@ -50,7 +49,7 @@ const ClientOrder = (outlet) => {
         body: JSON.stringify({FName,LName,address,city,state,pinCode,totalAmount,prodInfo,id:a}) }).then((t) =>
             t.json()
           );
-          console.log(data);
+       
   
           var options = {
             key: process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
@@ -76,7 +75,7 @@ const ClientOrder = (outlet) => {
           const paymentObject = new window.Razorpay(options);
           paymentObject.open();
         };
-        console.log(meData);
+        
         const router = useRouter()
         const [discount, setdiscount] = useState(0);
         const [coupon, setcoupon] = useState("");
@@ -89,10 +88,10 @@ const ClientOrder = (outlet) => {
         const [disabled, setDisabled] = useState(false)
         const [pinparent, setpinparent] = useState(false)
         useEffect(() => {
-          console.log("Use Effect is Running ");
+       
           settotal(meData.total)
           if (FName.length>=3 && FName.length>=3 && address.length>=3) {
-            console.log("This Condition Runs");
+           
             setDisabled(false)
           }
           if (FName.length<=3 ) {
@@ -110,7 +109,7 @@ const ClientOrder = (outlet) => {
         
         const handleChange=(e)=>{
           if (e.target.name==="FName") {
-            console.log(e.target.value);
+            
             setFName(e.target.value);
           }
           if (e.target.name==="LName") {
@@ -133,7 +132,7 @@ const ClientOrder = (outlet) => {
           }
           
         }
-        console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>........<<<<<<<<<<<<<",a['name']);
+    
         return (
           <div className='flex justify-around my-6 '>
          
@@ -196,14 +195,14 @@ const ClientOrder = (outlet) => {
         return;
       }
     for (let i = 0; i < data.length; i++) {
-      console.log("Traversing For Loop");
+      
       
       const element = data[i];
       const key=element['coupon'];
       const value=element['amount'];
       
       if (key==coupon) {
-        console.log("Coupon key is Equal to My key",discount);
+        
         setdiscount(value);
         k=1;
         break;

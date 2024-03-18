@@ -25,23 +25,22 @@ const page = () => {
     const [otpUi,setotpUi]=useState(true)
     const handleChange=(e)=>{
         if (e.target.name==="name") {
-            console.log(e.target.value);
+        
             setname(e.target.value)
         }
         if (e.target.name==="email") {
-            console.log(e.target.value);
+        
             setemail(e.target.value)
         }
         if (e.target.name==='password') {
-            console.log(e.target.value);
+        
             setpassword(e.target.value)
         }
         if (e.target.name==='one') {
         
             
-            console.log(e.target.value);
             setOneNumber(e.target.value)
-            console.log(typeof oneNumber);
+          
             
            
           
@@ -51,24 +50,23 @@ const page = () => {
             
            
               
-              console.log(e.target.value);
+              
             settwoNumber(e.target.value)
          
         }
         if (e.target.name==='three') {
          
 
-            console.log(e.target.value);
             setthreeNumber(e.target.value)
          
         }
         if (e.target.name==='four') {
          
           
-            console.log(e.target.value);
+            
             setfourNumber(e.target.value)
-            console.log(fourNumber);
-            console.log("My Number is is is is is is is is si sis is s::",(oneNumber+twoNumber+threeNumber+fourNumber));
+            
+           
             fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
               method: 'PUT',
               headers: {  
@@ -89,7 +87,7 @@ const page = () => {
             }
             else{
                 toast.error("Error To Login");
-                console.log("Unable To Login");
+                
               }
               console.log(json);
             })
@@ -98,16 +96,15 @@ const page = () => {
         }
     }
     function onChange(value) {
-      console.log("Captcha value:", value);
+    
       setdisabled(false)
 
     }
 
     
     const handleClick=()=>{
-        console.log("Handle Click is Running");
-        console.log(email);
-        console.log(password);
+    
+        
     fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
       method: 'POST',
       headers: {  
@@ -120,17 +117,16 @@ const page = () => {
 
         toast.success("OTP has been Sent Successfully");
         // document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
-        // console.log("Sign Up Successfully");
+        
         setotpState(false)
         
-        // router.push(`/`)
-        // router.refresh()
+        
     }
     else{
         toast.error("Unable To Login");
-        console.log("Unable To Login");
+       
       }
-      console.log(json);
+      
     })
     }
   return (
@@ -173,7 +169,7 @@ const page = () => {
 <div className=' w-16'></div>
                 <GoogleLogin 
   onSuccess={credentialResponse => {
-    console.log(credentialResponse);
+   
     document.cookie=`token="${credentialResponse['credential']};path=/"`
     router.push('/')
     router.refresh()

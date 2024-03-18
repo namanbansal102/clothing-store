@@ -6,7 +6,7 @@ import ClientOrder from './ClientOrder';
 const DataOrder =async(store) => {
     const storeo=store['store']
     var total=0;
-    console.log("Storeo is Storeo is Storeo is",storeo);
+   
     const fetchData=async ()=>{
         let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/finalOrder`, {
            method: 'POST',
@@ -26,7 +26,7 @@ const DataOrder =async(store) => {
      const getVerifyTokenUser=async ()=>{
       const cookieStore = cookies()
       let token = (cookieStore.get('token'))
-      console.log("In Nav Data Component Token Val is",token);
+      
       let newPromise =  
       new Promise(function (resolve, reject) { 
       setTimeout(function () { 
@@ -47,10 +47,10 @@ const DataOrder =async(store) => {
           }).then((a)=>a.json()).then(async (json)=>{
             let result = await newPromise; 
             if (json.success==true && json.data!=null) {
-              console.log("My json in Payment Gate is,.,.,.,::::::::::::::::::::::::::",json);
+             
               myjsonToken=json
             }else{
-              console.log("My json in Payment Gate is,.,.,.,::::::::::::::::::::::::::",myjsonToken);
+              
               myjsonToken=json
           }
       

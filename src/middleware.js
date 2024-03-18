@@ -15,7 +15,7 @@ export async function middleware(req,res) {
     query=query.split('"')
     query=query[1]
   }
-  // console.log("Middle Ware Query is:::>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",query);
+ 
   if (query==null && !req.nextUrl.pathname.startsWith('/Login') && !req.nextUrl.pathname.startsWith('/SignUp')) {
     // return NextResponse.json({hello:"query==null"})    
     return NextResponse.redirect(new URL('/', req.url))   
@@ -31,7 +31,7 @@ export async function middleware(req,res) {
                 nat:decrypted['iat'],
                 nbf:decrypted['nbf'],
             }
-    // console.log(decrypted+">>>>>>>>>>>>>>>>>>>>>>>");
+  
     
 }else{
   

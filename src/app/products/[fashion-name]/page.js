@@ -6,7 +6,7 @@ import FilterBar from '@/app/FilterBar'
 import DataComponent from './[product-name]/components/DataComponent'
 const page = async (slug) => {
   const k=(slug['params'])["fashion-name"];
-  console.log("Slug in Product js Page is",k);
+  
   let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/getProducts?query=${k}`)
   let newPromise =  
   new Promise(function (resolve, reject) { 
