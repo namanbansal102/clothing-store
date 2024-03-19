@@ -145,15 +145,33 @@ const [input, setInput] = useState("");
         setMenuShow(!menuShow)
       }} className='lg:hidden xl:hidden  2xl:hidden md:hidden max-sm:text-2xl max-sm:visible max-sm:mr-5' />
       <ul className={`flex gap-5 text-xl  max-sm:flex-col   max-sm:w-full   max-sm:absolute max-sm:left-0 max-sm:top-32 max-sm:bg-white max-sm:text-xl max-sm:opacity-95 max-sm:rounded-md duration-200  max-sm:${menuShow?'visible':'hidden'}`}>
-        <li className=" cursor-pointer text-red-400 font-semibold">Sale</li>
-        <li className=" cursor-pointer hover:ext-gray-300"><Link href={'/'}>Home</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/men'}>Men</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/women'}>Women</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/kids'}>Kids</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/beauty'}>Beauty</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/brand'}>Brand</Link></li>
-        <li className=" cursor-pointer hover:text-gray-300">W-Style</li>
-        <li className=" cursor-pointer hover:text-gray-300">View More</li>
+        <li onClick={()=>{
+          setMenuShow(false)
+        }}  className=" cursor-pointer text-red-400 font-semibold">Sale</li>
+        <li  onClick={()=>{
+          setMenuShow(false)
+        }} className=" cursor-pointer hover:ext-gray-300"><Link href={'/'}>Home</Link></li>
+        <li onClick={()=>{
+          setMenuShow(false)
+        }}  className=" cursor-pointer hover:text-gray-300"><Link href={'/products/men'}>Men</Link></li>
+        <li  onClick={()=>{
+          setMenuShow(false)
+        }} className=" cursor-pointer hover:text-gray-300"><Link href={'/products/women'}>Women</Link></li>
+        <li onClick={()=>{
+          setMenuShow(false)
+        }}  className=" cursor-pointer hover:text-gray-300"><Link href={'/products/kids'}>Kids</Link></li>
+        <li  onClick={()=>{
+          setMenuShow(false)
+        }} className=" cursor-pointer hover:text-gray-300"><Link href={'/products/beauty'}>Beauty</Link></li>
+        <li onClick={()=>{
+          setMenuShow(false)
+        }}  className=" cursor-pointer hover:text-gray-300"><Link href={'/products/brand'}>Brand</Link></li>
+        <li onClick={()=>{
+          setMenuShow(false)
+        }}  className=" cursor-pointer hover:text-gray-300">W-Style</li>
+        <li onClick={()=>{
+          setMenuShow(false)
+        }}  className=" cursor-pointer hover:text-gray-300">View More</li>
       </ul>
       </div>
       </div>

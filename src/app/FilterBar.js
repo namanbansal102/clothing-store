@@ -56,7 +56,7 @@ let result = await newPromise;
     <div className="mysearchbar flex justify-center items-center gap-5 my-6 max-sm:flex-col">
     
         <BsFillGrid3X3GapFill />
-    <div className='mb-2 max-sm:border-2 max-sm:border-black '>
+    <div className='mb-2  '>
         <input value={change} onChange={handleChange} className='w-96 appearance-none bg-black myrange' type="range" />
     </div>
     <h1 className='text-gray-300 underline cursor-pointer hover:text-black'>Filter</h1>

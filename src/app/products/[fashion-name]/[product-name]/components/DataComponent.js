@@ -54,12 +54,16 @@ const DataComponent =async (outlet) => {
             let result = await newPromise; 
       let outData=await fetchData();
       
-      
+      console.log("outData is is is is is is",outData);
       let fetchSimilar=await fetchSimilarProducts(outData);
       
   return (
     <>
-    <ProductShow outlet={{outData,fetchSimilar}}></ProductShow>
+    {outData==undefined && <div> <div className='h-full w-full flex justify-center items-center'>
+        <img className='my-8' src="https://freefrontend.com/assets/img/html-funny-404-pages/CodePen-404-Page.gif" alt="" />
+        </div></div>}
+    {outData!=undefined &&
+    <ProductShow outlet={{outData,fetchSimilar}}></ProductShow>}
     </>
   )
 }

@@ -7,6 +7,9 @@ const CartClient = ( outlet ) => {
   const [total, setTotal] = useState(0);
  
   const [json, setJson] = useState(outlet.outlet.k);
+  if (json==undefined) {
+    setJson([]);
+  }
 
   useEffect(() => {
    
@@ -21,13 +24,13 @@ const CartClient = ( outlet ) => {
 
   return (
     <>
-      {json==undefined && (
+      {(json.length==0 )&& (
          <div className='h-full w-full flex justify-around my-10 items-center flex-col gap-9'>
           <img src='https://bakestudio.in/assets/images/cart/empty-cart.gif' alt='' />
-          <h1 className='text-5xl font-bold'>YOUR CART IS EMPTY</h1>
+          <h1 className='text-5xl font-thin'>YOUR CART IS EMPTY</h1>
         </div>
       )}
-      {json!=undefined && (
+      {(json!=undefined && json.length!=0 ) && (
         <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60 max-sm:flex-col max-sm:gap-1 max-sm:mx-0 max-sm:w-full'>
           <div className='whole-cart-big w-fit px-4  rounded-2xl shadow-md max-sm:px-0'>
             <div className='cart-head flex items-center flex-col '>
