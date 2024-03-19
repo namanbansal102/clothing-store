@@ -6,6 +6,7 @@ import ClientOrder from './ClientOrder';
 const DataOrder =async(store) => {
     const storeo=store['store']
     var total=0;
+    console.log("my Storeo is is is is is is si si sis is sis is is sis is sis si ssi setDisabled",storeo);
    
     const fetchData=async ()=>{
         let data=await fetch(`${process.env.NEXT_PUBLIC_HOST}api/finalOrder`, {
@@ -56,6 +57,7 @@ const DataOrder =async(store) => {
       
           })}
      }
+     console.log("me Data is Equal to::::::::::::::::::",myjson);
      await getVerifyTokenUser()
 
      
