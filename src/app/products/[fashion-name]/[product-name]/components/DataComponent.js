@@ -8,7 +8,7 @@ const DataComponent =async (outlet) => {
     const fetchData = async () => {
         try {
          
-          const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/fetchProd`, {
+          const response = await fetch(`https://clothing-store-naman.vercel.app/api/fetchProd`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
