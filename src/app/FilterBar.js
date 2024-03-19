@@ -52,11 +52,11 @@ let result = await newPromise;
   return (
     <>
   
-    <div className='ml-[53vw]'>
-    <div className="mysearchbar flex justify-center items-center gap-5 my-6">
+    <div className='ml-[53vw] max-sm:ml-0'>
+    <div className="mysearchbar flex justify-center items-center gap-5 my-6 max-sm:flex-col">
     
         <BsFillGrid3X3GapFill />
-    <div className='mb-2'>
+    <div className='mb-2 max-sm:border-2 max-sm:border-black '>
         <input value={change} onChange={handleChange} className='w-96 appearance-none bg-black myrange' type="range" />
     </div>
     <h1 className='text-gray-300 underline cursor-pointer hover:text-black'>Filter</h1>
@@ -75,9 +75,10 @@ let result = await newPromise;
         {loading==false && <div>
 
         
-      {myarr.length!=0 && <div className=' grid grid-cols-4 gap-4'>
+      {myarr.length!=0 && <div className=' grid grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:items-center max-sm:ml-5'>
         {myarr.map((element)=>{
-          return <Link  href={`${element['size'].split("_")[0]}/${(element['slug'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;
+          return <Link  href={`${element['size'].split("_")[0]}/${(element['slug'].split(" ")).join("-")}`}>
+            <Product outletName={element} /></Link>;
         })}
         
         </div>

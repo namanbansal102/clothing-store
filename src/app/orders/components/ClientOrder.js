@@ -134,7 +134,7 @@ const ClientOrder = (outlet) => {
         }
     
         return (
-          <div className='flex justify-around my-6 '>
+          <div className='flex justify-around my-6 max-sm:flex-col max-sm:gap-4 max-sm:mb-10'>
          
     <div className="left-portion  w-fit flex flex-col mx-3 gap-5">
         <img className=' h-28 m-auto' src="https://www.westside.com/cdn/shop/files/w-logo.png?height=628&pad_color=fff&v=1687335574&width=1200" />
@@ -145,25 +145,26 @@ const ClientOrder = (outlet) => {
         </div>
         <div className="uptoDate flex flex-row gap-3">
             <input type="checkbox" />
-            <h1>Keep me up to date on news and exclusive offers through all channels,including WhatsApp</h1>
+            <h1 className='max-sm:text-center'>Keep me up to date on news and exclusive offers through all channels,including WhatsApp</h1>
         </div>
         
             <h1 className='text-3xl'>Shipping Address</h1>
         <div className="form-option flex flex-col gap-7">
-            <div className="name flex gap-3">
+            <div className="name flex gap-3 max-sm:flex-col max-sm:gap-4">
 
             <input name='FName' onChange={handleChange} type="text" className='text-2xl shadow-sm border-2 px-3 h-16 border-gray-300 rounded-lg' placeholder='FirstName' />
             <input name='LName' onChange={handleChange} type="text" className='text-2xl shadow-sm border-2 px-3 h-16 border-gray-300 rounded-lg' placeholder='LastName' />
             </div>
-            <div>
-<div className='flex gap-3  '>
+            <div className=''>
+<div className='flex gap-3 max-sm:flex-col '>
+              
 
             <input name='address' onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Address' />
             <input name='apartment' onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Apartment suite ' />
             </div>
 </div>
             <PinCode outlet={{city,setcity,state,setstate,pinparent,setpinparent}}></PinCode>
-            <div className="get-city flex gap-3">
+            <div className="get-city flex gap-3 max-sm:flex-col">
                 <input name='city'value={city} readOnly onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg  px-3'  type="text" placeholder='City' />
                 <input value={state}  readOnly name='state' onChange={handleChange} className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3'  type="text" placeholder='State' />
             </div>
@@ -190,12 +191,13 @@ const ClientOrder = (outlet) => {
     <button onClick={()=>{
 
       let k=0;
+      setdiscount(0)
+    
       if (coupon.length<=2) {
         toast.error("Please Enter a Valid Coupon");
         return;
       }
     for (let i = 0; i < data.length; i++) {
-      
       
       const element = data[i];
       const key=element['coupon'];
@@ -208,8 +210,14 @@ const ClientOrder = (outlet) => {
         break;
       }
     }
+    if (total<discount) {
+      toast.error("Please Enter a Valid Coupon");
+      setdiscount(0);
+      return;
+      
+    }
     if (k==1) {
-      toast.success("Horrahy Coupon Applied");
+      toast.success("Hurrah Coupon Applied");
     }else{
       toast.error("Invalid Coupon");
       
@@ -217,7 +225,7 @@ const ClientOrder = (outlet) => {
   
     }} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-sm'>Apply</button>
     </div>
-    <div className="uptoDate flex flex-row gap-3 my-6">
+    <div className="uptoDate flex flex-row gap-3 my-6 max-sm:mb-7">
             <input type="checkbox" />
             <h1 className='text-green-500'>Go Green - Opt for not returning online <br></br> and get a treat - further 5% off. Returns welcome at ANY Westside <br></br>Store though!</h1>
         </div>

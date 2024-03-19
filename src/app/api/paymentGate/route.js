@@ -51,7 +51,7 @@ export async function POST(req, res) {
         address:address,
         products:arr,
         amount:response.amount,
-        status:"Cleared",
+        status:"Processing",
 
     })
     await p.save();

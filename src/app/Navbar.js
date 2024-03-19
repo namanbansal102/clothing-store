@@ -1,16 +1,15 @@
 'use client'
 import { TypeAnimation } from 'react-type-animation';
+import { CiMenuBurger } from "react-icons/ci";
+
 import Popup from 'reactjs-popup';
 import  LoadingBar  from "react-top-loading-bar";
 import 'reactjs-popup/dist/index.css';
-
 import Image from "next/image";
 import Script from "next/script";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping, faCartShopping, faCheck, faHeart, faL, faMagnifyingGlass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import ReactSearchBox from "react-search-box";
-
 import Link from "next/link";
 import React, { useState,useEffect } from "react";
 import { usePathname, useRouter} from 'next/navigation';    
@@ -20,6 +19,7 @@ import Search from './components/search/search';
 const Navbar =(outlet) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
+  const [menuShow, setMenuShow] = useState(false)
 
   const [typeDis, settypeDis] = useState(false)
   const [search, setsearch] = useState("")
@@ -61,19 +61,20 @@ const [input, setInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   
   return (
-    <div className={`z-50 sticky top-0 ${pathname=='/'?'bg-transparent':'bg-white'}`}>
+    <div className={`z-50 sticky top-0 ${pathname=='/'?'bg-transparent':'bg-white'} w-[100vw]`}>
    
   
-    <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent ">
+    <div className=" h-32 flex  justify-around  items-center shadow-xl bg-transparent
+   ">
       {/* // Left Protion */}
-      <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14"></img>
+      <img src="https://www.westside.com/cdn/shop/files/w-logo.png?v=1687335574&width=210" className=" h-14 max-sm:h-10 max-sm:m-auto"></img>
       {/* Center Protion */}
       <div >
 
-      <div className="outerClass flex  justify-start px-6 items-center p-1 border-[1.5px] border-black rounded-3xl my-2 h-14">
+      <div className="outerClass flex  justify-start px-6 items-center p-1 border-[1.5px] border-black rounded-3xl my-2 h-14 max-sm:hidden">
         
       
-<div className='' hidden={typeDis} on onClick={()=>{
+<div className='max-sm:hidden' hidden={typeDis} on onClick={()=>{
   // console.log("OnClick Function is Running");
   settypeDis(true)
  }}>
@@ -104,7 +105,7 @@ const [input, setInput] = useState("");
           settypeDis(false)
         }, 300);
 
-      }}  className="automate-search-box my-8 bg-black">
+      }}  className="automate-search-box my-8 bg-black ">
 
       {/* <input onChange={handleSearch} value={search}  type="text" placeholder='' /> */}
     
@@ -117,17 +118,17 @@ const [input, setInput] = useState("");
       onChange={(e) => {
         setInput(e.target.value)
         
-    setsearch(e.target.value)
-    if (e.target.value="") {
-      // console.log("If Condtion Satisfied");
-      if (e.target.value="") {
-        settypeDis(true)
-        settypeDis(false)
-      }}
-
-
-
-      }}
+        setsearch(e.target.value)
+        if (e.target.value="") {
+          // console.log("If Condtion Satisfied");
+          if (e.target.value="") {
+            settypeDis(true)
+            settypeDis(false)
+          }}
+          
+          
+          
+        }}
       setPopup={() => {
         setShowPopup(true);
       }}
@@ -140,7 +141,10 @@ const [input, setInput] = useState("");
      </div>
      {/* Center Lowest Portion */}
      <div>
-      <ul className=" flex gap-5 text-xl">
+      <CiMenuBurger onClick={()=>{
+        setMenuShow(!menuShow)
+      }} className='lg:hidden xl:hidden  2xl:hidden md:hidden max-sm:text-2xl max-sm:visible max-sm:mr-5' />
+      <ul className={`flex gap-5 text-xl  max-sm:flex-col   max-sm:w-full   max-sm:absolute max-sm:left-0 max-sm:top-32 max-sm:bg-white max-sm:text-xl max-sm:opacity-95 max-sm:rounded-md duration-200  max-sm:${menuShow?'visible':'hidden'}`}>
         <li className=" cursor-pointer text-red-400 font-semibold">Sale</li>
         <li className=" cursor-pointer hover:ext-gray-300"><Link href={'/'}>Home</Link></li>
         <li className=" cursor-pointer hover:text-gray-300"><Link href={'/products/men'}>Men</Link></li>
@@ -154,9 +158,9 @@ const [input, setInput] = useState("");
       </div>
       </div>
     {/* Right Portion */}
-    <div className=" w-fit h-fit flex gap-7  justify-center items-center font-medium text-2xl font-medium">
+    <div className=" w-fit h-fit flex gap-7  justify-center items-center font-medium text-2xl font-medium max-sm:hidden">
     <Link className='cursor-pointer' href={'/wishlist'}>
-    <img width="30" height="30" src="https://img.icons8.com/ios/50/like--v1.png" alt="like--v1"/>
+    <img width="30" height="30"  className='' src="https://img.icons8.com/ios/50/like--v1.png" alt="like--v1"/>
     </Link>
     <Link className='cursor-pointer' href={'/cart'}>
       <img width="30" height="30" src="https://img.icons8.com/ios/50/shopping-cart--v1.png" alt="shopping-cart--v1"/>

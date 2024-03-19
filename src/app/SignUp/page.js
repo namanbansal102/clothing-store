@@ -191,7 +191,7 @@ const page = () => {
       
       <div className="mybox flex flex-col  items-center justify-center my-28">
 
-      <h1 className='text-3xl'>Enter Otp To Confirm Your Account</h1>
+      <h1 className='text-3xl max-sm:text-center'>Enter Otp To Confirm Your Account</h1>
       <div class="prompt flex items-center justify-center my-10 gap-7">
       <input name='one'  onChange={handleChange}  value={oneNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
       <input name='two'  readOnly={OtpDisabled}onChange={handleChange} value={twoNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />

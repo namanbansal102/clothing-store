@@ -28,8 +28,8 @@ const CartClient = ( outlet ) => {
         </div>
       )}
       {json!=undefined && (
-        <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60'>
-          <div className='whole-cart-big w-fit px-4  rounded-2xl shadow-md'>
+        <div className='wholeDiv  w-fit mx-4 my-8 flex gap-60 max-sm:flex-col max-sm:gap-1 max-sm:mx-0 max-sm:w-full'>
+          <div className='whole-cart-big w-fit px-4  rounded-2xl shadow-md max-sm:px-0'>
             <div className='cart-head flex items-center flex-col '>
               <div className='cart-head-right text-3xl my-3'>Shopping Bag</div>
               <div className='card-head-left'>

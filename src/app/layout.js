@@ -31,17 +31,17 @@ export default function RootLayout({ children }) {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
       </Head>
       <body id="modal" className={inter.className} >
-        <div  className="">
+        <div  className=" overflow-x-hidden">
 
       <NextTopLoader
       color="#F62B00"
       initialPosition={0.08}
-      crawlSpeed={200}
+      crawlSpeed={100}
       height={2}
       crawl={true}
-      showSpinner={true}
+      showSpinner={false}
       easing="ease"
-      speed={200}
+      speed={100}
       shadow="0 0 10px #2299DD,0 0 5px #2299DD"
       template='<div class="bar" role="bar"><div class="peg"></div></div> 
       <div class="spinner" role="spinner"><div class="spinner-icon"></div></div>'

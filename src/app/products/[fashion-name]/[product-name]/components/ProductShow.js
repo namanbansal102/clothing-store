@@ -95,13 +95,13 @@ const ProductShow = (outlet) => {
   return (
     <>
      
-        <div className='overflow-x-hidden'>
+        <div className='overflow-hidden max-sm:mx-2'>
         
-          <div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around">
+          <div className="whole-part flex flex-row my-9 mx-4 gap-9 justify-around max-sm:flex-col">
 
             <div className="left-portion  w-fit flex gap-9 ">
-              <img className='h-[65vh] shadow-lg rounded-xl rotate-3  backdrop-blur-4xl' src={prop.img} alt="" />
-              <img className='h-[65vh] shadow-lg rounded-xl -rotate-3 grayscale' src={prop.img} alt="" />
+              <img className='h-[65vh] max-sm:h-[75vw] shadow-lg rounded-xl rotate-3  backdrop-blur-4xl' src={prop.img} alt="" />
+              <img className='h-[65vh] max-sm:hidden shadow-lg rounded-xl -rotate-3 grayscale' src={prop.img} alt="" />
             </div>
             <div className="right-portion   my-37 w-45 text-justify ">
               <div className="right-portion-upper text-xl leading-10">
@@ -163,7 +163,7 @@ const ProductShow = (outlet) => {
     },
   }}
 />
-          <div ref={useHorizontalScroll()} style={{ overflow: "auto" }} className="similar-products flex gap-1 justify-center items-center overflow-x-auto my-8 no-scrollbar ">
+          <div ref={useHorizontalScroll()} style={{ overflow: "auto", }} className="similar-products flex gap-1 justify-center items-center overflow-x-auto my-8 no-scrollbar  ">
             {similar.map((element)=>{
               return <Link scroll={true} href={`${process.env.NEXT_PUBLIC_HOST}products/${type}/${(element['title'].split(" ")).join("-")}`}><Product outletName={element} /></Link>;})}
         

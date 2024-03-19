@@ -32,6 +32,9 @@ export async function POST(req,res){
                 if(name[1]=="beauty"){
                     query = Products.findOne({ '_id': value });
                 }
+                if(name[1]=="brand"){
+                    query = Products.findOne({ '_id': value });
+                }
                 
                 query.select('title img category size color price quantity');
                 let myproduct = await query.exec();

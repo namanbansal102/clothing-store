@@ -11,7 +11,7 @@ const ClientCom = (outlet) => {
     }
   return (
     <div className='w-[100vw] h-[100vh] flex flex-col  items-center'>
-  <h1 className='my-1 text-6xl'>My Wishlist</h1>
+  <h1 className='my-1 text-5xl font-thin mt-8 mb-6'>My Wishlist</h1>
   {items.length==0 && 
   <div>
     <h1 className='text-center'>Your List is Empty</h1>
@@ -19,7 +19,7 @@ const ClientCom = (outlet) => {
   </div>
   }
   {items.length!=0 && 
-    <div className='grid grid-cols-8 mx-7  gap-7 mx-10'>
+    <div className='grid grid-cols-8 mx-7  gap-7 mx-10 max-sm:grid-cols-2'>
        
         {items.map(({key,value})=>{
            

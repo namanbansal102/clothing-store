@@ -9,7 +9,6 @@ const ProductsSchema=new mongoose.Schema({
     color:{type:String},
     price:{type:Number,required:true},
     quantity:{type:String,required:true,default:1},
-
 },{timestamps:true})
 // Not For Recompiling The Module
 mongoose.models={}

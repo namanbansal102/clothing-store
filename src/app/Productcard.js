@@ -11,7 +11,6 @@ const Product = (props) => {
   
   return (
     <>
-    
     <div className="div-card   w-72 my-4 mx-9 cursor-pointer shadow-md hover:scale-105 transition-all duration-500">
     <FaRegHeart   onClick={()=>{
       localStorage.setItem(`myWestSide_${title}`,JSON.stringify({title,slug,desc,img,size}))

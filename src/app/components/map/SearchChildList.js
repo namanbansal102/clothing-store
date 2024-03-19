@@ -12,7 +12,7 @@ export default function SearchChildList({  img,slug,size, title, removeItem }) {
         </div>
         <div>
           <button className="close-btn" onClick={removeItem}>
-            ×
+            
           </button>
         </div>
       </div>
