@@ -88,11 +88,11 @@ const page = () => {
                 <h1 className='text-xl my-2 '>Enter Email</h1>
                 <form  onSubmit={handleClick} className=''>
 
-                <input size={30}  maxLength={30} minLength={15}  name='email' onChange={handleChange}  className='shadow-sm border-2 h-16 border-gray-300 rounded-lg ' type="text" placeholder='Enter Email Address' />
+                <input required={true} size={30}  maxLength={30} minLength={15}  name='email' onChange={handleChange}  className='shadow-sm border-2 h-16 border-black rounded-sm px-3' type="text" placeholder='Enter Email Address' />
                 <h1 className='text-xl my-2 '>Enter password</h1>
-                <input  size={30}  maxLength={15} minLength={5} name='password' type='password'  onChange={handleChange} className='shadow-sm border-2 h-16 border-gray-300 rounded-lg '  placeholder='Password Please' />
+                <input  required={true} size={30}  maxLength={15} minLength={5} name='password' type='password'  onChange={handleChange} className='shadow-sm border-2 h-16 border-black rounded-sm px-3'  placeholder='Password Please' />
                 <br />
-                <button  type='submit' className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl'>LOG IN</button>
+                <button  type='submit' className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-sm my-3 text-xl'>LOG IN</button>
                 </form>
                 <h1 className='text-center'><Link href={'/SignUp'}><u>Do Not Have Account</u>
                 </Link>

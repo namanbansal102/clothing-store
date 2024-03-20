@@ -37,62 +37,19 @@ const page = () => {
             setpassword(e.target.value)
         }
         if (e.target.name==='one') {
-        
-            
+          
             setOneNumber(e.target.value)
-          
-            
-           
-          
           
         }
           if (e.target.name==='two') {
-            
-           
-              
-              
+  
             settwoNumber(e.target.value)
-         
         }
         if (e.target.name==='three') {
-         
-
-            setthreeNumber(e.target.value)
-         
+            setthreeNumber(e.target.value)  
         }
         if (e.target.name==='four') {
-         
-          
-            
             setfourNumber(e.target.value)
-            
-           
-            fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
-              method: 'PUT',
-              headers: {  
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({"clientOtp":Number(oneNumber+twoNumber+threeNumber+e.target.value)}),
-            }).then((a)=>a.json()).then((json)=>{
-              
-              if (json.success==true && json.token!=null) {
-        
-                toast.success("Sign Up Successfully");
-                document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
-                console.log("Sign Up Successfully");
-               
-                
-                router.push(`/`)
-                router.refresh()
-            }
-            else{
-                toast.error("Error To Login");
-                
-              }
-              console.log(json);
-            })
-
-          
         }
     }
     function onChange(value) {
@@ -102,9 +59,9 @@ const page = () => {
     }
 
     
-    const handleClick=()=>{
+    const handleClick=(e)=>{
     
-        
+        e.preventDefault();
     fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
       method: 'POST',
       headers: {  
@@ -129,6 +86,32 @@ const page = () => {
       
     })
     }
+    const handleFormSubmit=(e)=>{
+      e.preventDefault();
+        
+      fetch(`${process.env.NEXT_PUBLIC_HOST}api/signup`, {
+        method: 'PUT',
+        headers: {  
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({"clientOtp":Number(oneNumber+twoNumber+threeNumber+fourNumber)}),
+      }).then((a)=>a.json()).then((json)=>{
+        if (json.success==true && json.token!=null) {
+          toast.success("Sign Up Successfully");
+          document.cookie=`token=${JSON.stringify(json['token'])};path=/`;
+          console.log("Sign Up Successfully");
+          router.push(`/`)
+          router.refresh()
+      }
+      else{
+          toast.error("Error To Login");
+
+        }
+        console.log(json);
+      })
+
+
+    }
   return (
     <>
     {otpState==true && 
@@ -147,11 +130,13 @@ const page = () => {
             <div className="lower-right-portion">
                 <h1 className='text-3xl my-3'>Sign Up</h1>
                 <h1  className='text-xl my-2 '>Enter Your Name</h1>
-                <input onChange={handleChange} name='name' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Enter Name' />
+                <form  method="post" onSubmit={handleClick}>
+
+                <input required={true} minLength={2} maxLength={13} onChange={handleChange} name='name' className='text-xl shadow-sm border-2 h-16 border-black rounded-sm px-3' type="text" placeholder='Enter Name' />
                 <h1 className='text-xl my-2 '>Enter Email</h1>
-                <input name='email' onChange={handleChange} typeof='email' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' type="text" placeholder='Enter Email Address' />
+                <input required={true} minLength={10} maxLength={53} name='email' onChange={handleChange} typeof='email' className='text-xl shadow-sm border-2 h-16 border-black rounded-sm px-3 bg-white' type="text" placeholder='Enter Email Address' />
                 <h1 className='text-xl my-2 '>Enter password</h1>
-                <input name='password' onChange={handleChange} type='password' className='text-2xl shadow-sm border-2 h-16 border-gray-300 rounded-lg px-3' placeholder='Password Please' />
+                <input required={true} minLength={5}maxLength={23}  name='password' onChange={handleChange} type='password' className='text-xl shadow-sm border-2 h-16 border-black rounded-sm px-3 bg-white' placeholder='Password Please' />
                 <br />  
                 <div className='my-4'>
                 <ReCAPTCHA
@@ -160,7 +145,8 @@ const page = () => {
     />
     </div>
     
-                <button disabled={disabled} onClick={handleClick} className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-lg my-3 text-xl disabled:bg-slate-700 disabled:cursor-not-allowed disabled:text-white'>Sign Up</button>
+                <button type='submit' disabled={disabled}  className='bg-black text-white px-2 py-2 hover:bg-white hover:text-black rounded-sm my-3 text-xl disabled:bg-slate-700 disabled:cursor-not-allowed disabled:text-white'>Sign Up</button>
+    </form>
                 <h1 className='text-center'><Link href={'/Login'}><u>Want's to Login</u>
                 </Link>
                 </h1>
@@ -193,10 +179,16 @@ const page = () => {
 
       <h1 className='text-3xl max-sm:text-center'>Enter Otp To Confirm Your Account</h1>
       <div class="prompt flex items-center justify-center my-10 gap-7">
-      <input name='one'  onChange={handleChange}  value={oneNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
-      <input name='two'  readOnly={OtpDisabled}onChange={handleChange} value={twoNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
-      <input name='three' readOnly={OtpDisabled} onChange={handleChange} value={threeNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
-      <input name='four' readOnly={OtpDisabled} onChange={handleChange}  value={fourNumber} className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' type="number" />
+        <form className='flex items-center justify-center my-10 gap-7 flex-col' action="POST" onSubmit={handleFormSubmit}>
+      <div className='flex items-center justify-center gap-7'>
+
+      <input  type="number" min={0} max={9}  name='one'  onChange={handleChange}  value={oneNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3' />
+      <input type="number" min={0} max={9} name='two'  readOnly={OtpDisabled}onChange={handleChange} value={twoNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3'  />
+      <input type="number" min={0} max={9} name='three' readOnly={OtpDisabled} onChange={handleChange} value={threeNumber}  className='border-black h-20 w-16 border-2 font-bold text-3xl p-3'  />
+      <input type="number" min={0} max={9} name='four' readOnly={OtpDisabled} onChange={handleChange}  value={fourNumber} className='border-black h-20 w-16 border-2 font-bold text-3xl p-3'  />
+      </div>
+      <button type='submit' className='bg-black p-2 text-white'>Verify</button>
+        </form>
      
       
       </div>
