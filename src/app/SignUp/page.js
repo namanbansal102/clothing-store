@@ -132,7 +132,7 @@ const page = () => {
                 <h1  className='text-xl my-2 '>Enter Your Name</h1>
                 <form  method="post" onSubmit={handleClick}>
 
-                <input required={true} minLength={2} maxLength={13} onChange={handleChange} name='name' className='text-xl shadow-sm border-2 h-16 border-black rounded-sm px-3' type="text" placeholder='Enter Name' />
+                <input required={true} minLength={2} maxLength={23} onChange={handleChange} name='name' className='text-xl shadow-sm border-2 h-16 border-black rounded-sm px-3' type="text" placeholder='Enter Name' />
                 <h1 className='text-xl my-2 '>Enter Email</h1>
                 <input required={true} minLength={10} maxLength={53} name='email' onChange={handleChange} typeof='email' className='text-xl shadow-sm border-2 h-16 border-black rounded-sm px-3 bg-white' type="text" placeholder='Enter Email Address' />
                 <h1 className='text-xl my-2 '>Enter password</h1>
