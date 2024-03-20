@@ -17,7 +17,6 @@ const Product = (props) => {
       toast.success("Item Added To WishList");
     }} className='text-2xl my-1 float-right mr-2 cursor-pointer absolute ' />
         <img className='h-96' src={img} alt="" srcset="" />
-    
         <div className="lower-card-portion">
             <h1 className='text-gray-400'>{title.split(" ")[0]}</h1>
             <h1 className='text-black'>{title}</h1>

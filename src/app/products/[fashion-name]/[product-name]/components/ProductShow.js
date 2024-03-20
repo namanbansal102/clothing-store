@@ -35,7 +35,8 @@ const ProductShow = (outlet) => {
     let outcome=((outlet.outlet).outData)['product']
     let type=((outlet.outlet).outData)['slug']['fashion-name']
     
-    const similar=(outlet.outlet).fetchSimilar
+    let similar=(outlet.outlet).fetchSimilar
+    similar=similar.slice(0,5);
     let prop=outcome
     
 
